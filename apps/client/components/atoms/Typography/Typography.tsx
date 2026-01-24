@@ -1,6 +1,8 @@
 import { exhaustiveCheck } from "@/utils/type-checkers"
-import { FC } from "react"
+import { Resolve } from "@/utils/types"
+import { ComponentProps, FC } from "react"
 import { StyleSheet, Text } from "react-native"
+import { clamp } from "react-native-reanimated"
 
 type Color = "white" | "dark" | "theme"
 type Size = "xl-header" | "header" | "medium" | "regular" | "small" | "tiny"
@@ -29,7 +31,7 @@ function colorAdapter(color: Color) {
 function sizeAdapter(size: Size) {
   switch (size) {
     case "xl-header":
-      return 200
+      return 168
     case "header":
       return 70
     case "medium":
@@ -45,13 +47,30 @@ function sizeAdapter(size: Size) {
   }
 }
 
+function letterSpacingAdapter(size: Size) {
+  switch (size) {
+    case "xl-header":
+      return -10
+    case "header":
+      return -2.1
+    case "medium":
+    case "regular":
+    case "small":
+    case "tiny":
+      return -1
+    default:
+      return exhaustiveCheck(size)
+  }
+}
+
 function styles({ size, color, bold, shadow }: Omit<CommonProps, "children">) {
   return StyleSheet.create({
     text: {
+      fontFamily: bold ? "Karla_700Bold" : "Karla_400Regular",
       fontSize: sizeAdapter(size!),
       color: colorAdapter(color!),
       fontWeight: bold ? 700 : 400,
-      letterSpacing: size === "xl-header" ? -0.05 : -0.03,
+      letterSpacing: letterSpacingAdapter(size!),
       textShadowColor: shadow ? "rgba(0, 0, 0, 0.25)" : undefined,
       textShadowOffset: shadow ? { height: 4, width: 0 } : undefined,
       textShadowRadius: 4,
@@ -66,9 +85,17 @@ const defaultProps: Omit<CommonProps, "children"> = {
   shadow: false,
 }
 
-const Typography: FC<CommonProps> = ({ children, ...rest }) => {
+const Typography: FC<Resolve<CommonProps & ComponentProps<typeof Text>>> = ({
+  children,
+  style,
+  ...rest
+}) => {
   const props = { ...defaultProps, ...rest }
-  return <Text style={styles(props).text}>{children}</Text>
+  return (
+    <Text style={[styles(props).text, style]} {...rest}>
+      {children}
+    </Text>
+  )
 }
 
 export default Typography
