@@ -1,0 +1,16 @@
+<svg width="472" height="426" viewBox="0 0 472 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_0_3794)">
+<ellipse cx="235.914" cy="275" rx="100" ry="15" fill="black"/>
+</g>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M185.914 249L135.914 199H185.914V249Z" fill="#AD807D"/>
+<path d="M135.914 20C135.914 8.9543 144.868 0 155.914 0H315.914C326.96 0 335.914 8.95431 335.914 20V179C335.914 190.046 326.96 199 315.914 199H135.914V20Z" fill="#FFBDB8"/>
+<rect x="175.914" y="111" width="60" height="16" fill="black"/>
+<rect x="175.914" y="72" width="120" height="16" fill="black"/>
+<defs>
+<filter id="filter0_f_0_3794" x="0" y="124.086" width="471.828" height="301.828" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="67.957" result="effect1_foregroundBlur_0_3794"/>
+</filter>
+</defs>
+</svg>
