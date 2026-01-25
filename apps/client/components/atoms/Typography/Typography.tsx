@@ -2,7 +2,6 @@ import { exhaustiveCheck } from "@/utils/type-checkers"
 import { Resolve } from "@/utils/types"
 import { ComponentProps, FC } from "react"
 import { StyleSheet, Text } from "react-native"
-import { clamp } from "react-native-reanimated"
 
 type Color = "white" | "dark" | "theme"
 type Size = "xl-header" | "header" | "medium" | "regular" | "small" | "tiny"
@@ -31,17 +30,17 @@ function colorAdapter(color: Color) {
 function sizeAdapter(size: Size) {
   switch (size) {
     case "xl-header":
-      return 168
+      return 100
     case "header":
-      return 70
+      return 35
     case "medium":
-      return 34
+      return 17
     case "regular":
-      return 30
+      return 15
     case "small":
-      return 22
+      return 11
     case "tiny":
-      return 20
+      return 10
     default:
       return exhaustiveCheck(size)
   }
@@ -50,14 +49,14 @@ function sizeAdapter(size: Size) {
 function letterSpacingAdapter(size: Size) {
   switch (size) {
     case "xl-header":
-      return -10
+      return -5
     case "header":
-      return -2.1
+      return -1.05
     case "medium":
     case "regular":
     case "small":
     case "tiny":
-      return -1
+      return -0.5
     default:
       return exhaustiveCheck(size)
   }

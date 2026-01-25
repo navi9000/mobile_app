@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:web": "cd apps/client && pnpm web"
+    "dev:web": "cd apps/client && pnpm web",
+    "storybook": "cd apps/client && pnpm storybook"
   },
   "keywords": [],
   "author": "",

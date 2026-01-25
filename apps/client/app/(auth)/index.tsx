@@ -1,25 +1,31 @@
 import Typography from "@/components/atoms/Typography/Typography"
+import Login from "@/components/pages/Login"
 import type { FC } from "react"
 import { Image, StyleSheet, Text, View } from "react-native"
 
 const styles = StyleSheet.create({
+  container: {
+    height: "100%",
+    justifyContent: "flex-end",
+  },
   title: {
     position: "absolute",
-    top: 120,
-    left: -8,
+    top: 60,
+    left: -4,
   },
   img: {
     position: "absolute",
-    top: 270,
+    top: 150,
     left: "50%",
-    transform: "translate(-50%, 0)",
+    transform: "translate(-50%, 0) scale(0.5)",
+    transformOrigin: "top center",
     zIndex: -1,
   },
 })
 
 const Signin: FC = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <Typography
         color="white"
         size="xl-header"
@@ -33,6 +39,7 @@ const Signin: FC = () => {
         source={require("@/assets/images/speech_balloon.svg")}
         style={styles.img}
       />
+      <Login />
     </View>
   )
 }
