@@ -11,6 +11,7 @@ interface CommonProps {
   size?: Size
   bold?: boolean
   shadow?: boolean
+  underlined?: boolean
 }
 
 const styles = StyleSheet.create({
@@ -63,6 +64,10 @@ const styles = StyleSheet.create({
     textShadowOffset: { height: 4, width: 0 },
     textShadowRadius: 4,
   },
+  // underlined
+  text_underlined: {
+    textDecorationLine: "underline",
+  },
 })
 
 const Typography: FC<Resolve<CommonProps & ComponentProps<typeof Text>>> = ({
@@ -72,6 +77,7 @@ const Typography: FC<Resolve<CommonProps & ComponentProps<typeof Text>>> = ({
   size,
   shadow,
   color = "dark",
+  underlined,
   ...rest
 }) => {
   return (
@@ -82,6 +88,7 @@ const Typography: FC<Resolve<CommonProps & ComponentProps<typeof Text>>> = ({
         !!color && styles[`text_color${color}`],
         !!size && styles[`text_size${size}`],
         shadow && styles.text_shadow,
+        underlined && styles.text_underlined,
         style,
       ]}
       {...rest}
