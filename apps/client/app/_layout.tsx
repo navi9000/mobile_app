@@ -4,7 +4,6 @@ import { Stack } from "expo-router"
 import * as SplashScreen from "expo-splash-screen"
 import { useEffect } from "react"
 import "react-native-reanimated"
-import MainBackground from "@/components/atoms/MainBackground/MainBackground"
 import { Karla_400Regular, Karla_700Bold } from "@expo-google-fonts/karla"
 
 export {
@@ -46,11 +45,9 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   return (
-    <MainBackground>
-      <Stack>
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        {/* <Stack.Screen name="modal" options={{ presentation: 'modal' }} /> */}
-      </Stack>
-    </MainBackground>
+    <Stack>
+      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+      {/* <Stack.Screen name="modal" options={{ presentation: 'modal' }} /> */}
+    </Stack>
   )
 }

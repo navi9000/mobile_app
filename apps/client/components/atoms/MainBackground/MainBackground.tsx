@@ -10,9 +10,11 @@ const styles = StyleSheet.create({
   img: {
     minWidth: 320,
     maxWidth: 750,
+    width: "100%",
   },
   inlay: {
     width: "100%",
+    overflow: "hidden",
   },
 })
 

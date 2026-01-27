@@ -16,8 +16,6 @@ const Storybook = () => {
     Karla_700Bold,
   })
 
-  console.log({ fontsLoaded })
-
   if (!fontsLoaded) {
     return null
   }

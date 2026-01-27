@@ -1,3 +1,4 @@
+import MainBackground from "@/components/atoms/MainBackground/MainBackground"
 import Typography from "@/components/atoms/Typography/Typography"
 import Login from "@/components/pages/Login"
 import type { FC } from "react"
@@ -25,22 +26,24 @@ const styles = StyleSheet.create({
 
 const Signin: FC = () => {
   return (
-    <View style={styles.container}>
-      <Typography
-        color="white"
-        size="xlheader"
-        bold
-        shadow
-        style={styles.title}
-      >
-        Chat
-      </Typography>
-      <Image
-        source={require("@/assets/images/speech_balloon.svg")}
-        style={styles.img}
-      />
-      <Login />
-    </View>
+    <MainBackground>
+      <View style={styles.container}>
+        <Typography
+          color="white"
+          size="xlheader"
+          bold
+          shadow
+          style={styles.title}
+        >
+          Chat
+        </Typography>
+        <Image
+          source={require("@/assets/images/speech_balloon.svg")}
+          style={styles.img}
+        />
+        <Login />
+      </View>
+    </MainBackground>
   )
 }
 

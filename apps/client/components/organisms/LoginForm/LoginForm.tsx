@@ -1,5 +1,6 @@
 import Button from "@/components/atoms/Button/Button"
 import Container from "@/components/atoms/Container/Container"
+import Typography from "@/components/atoms/Typography/Typography"
 import FormInput from "@/components/molecules/FormInput/FormInput"
 import { FC } from "react"
 import { Pressable, StyleSheet, Text, View } from "react-native"
@@ -16,14 +17,15 @@ const styles = StyleSheet.create({
     bottom: 28,
     left: 0,
   },
-  text: {
-    color: "#fff",
-    textAlign: "center",
-  },
   button: {
     backgroundColor: "#00a0ff",
     paddingInline: 40,
     paddingBlock: 20,
+  },
+  text: {
+    flexDirection: "row",
+    gap: "0.25em",
+    justifyContent: "center",
   },
 })
 
@@ -37,9 +39,12 @@ const LoginForm: FC = () => {
         </Container>
         <Button style={styles.button}>Get Started</Button>
       </Container>
-      <Text style={styles.text}>
-        Not registered? <Pressable>Create Account</Pressable>
-      </Text>
+      <View style={styles.text}>
+        <Typography color="white">Not registered?</Typography>
+        <Pressable>
+          <Typography color="white">Create Account</Typography>
+        </Pressable>
+      </View>
     </Container>
   )
 }

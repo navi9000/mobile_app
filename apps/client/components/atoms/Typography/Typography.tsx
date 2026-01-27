@@ -71,6 +71,7 @@ const Typography: FC<Resolve<CommonProps & ComponentProps<typeof Text>>> = ({
   bold,
   size,
   shadow,
+  color = "dark",
   ...rest
 }) => {
   return (
@@ -78,6 +79,7 @@ const Typography: FC<Resolve<CommonProps & ComponentProps<typeof Text>>> = ({
       style={[
         styles.text,
         bold && styles.text_bold,
+        !!color && styles[`text_color${color}`],
         !!size && styles[`text_size${size}`],
         shadow && styles.text_shadow,
         style,
