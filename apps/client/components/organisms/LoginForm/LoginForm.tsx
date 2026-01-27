@@ -2,8 +2,9 @@ import Button from "@/components/atoms/Button/Button"
 import Container from "@/components/atoms/Container/Container"
 import Typography from "@/components/atoms/Typography/Typography"
 import FormInput from "@/components/molecules/FormInput/FormInput"
+import { Link, useRouter } from "expo-router"
 import { FC } from "react"
-import { Pressable, StyleSheet, View } from "react-native"
+import { Image, StyleSheet, View } from "react-native"
 
 const styles = StyleSheet.create({
   container: {
@@ -27,17 +28,31 @@ const styles = StyleSheet.create({
     paddingInline: 40,
     paddingBlock: 20,
     display: "flex",
-    justifyContent: "flex-end",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     width: "100%",
+  },
+  playIcon: {
+    height: 10,
+    width: 7,
   },
   text: {
     flexDirection: "row",
     gap: "0.25em",
     justifyContent: "center",
+    alignItems: "center",
   },
 })
 
 const LoginForm: FC = () => {
+  const playIcon = require("@/assets/images/play.svg")
+  const { navigate } = useRouter()
+
+  const signUp = () => {
+    navigate("/")
+  }
+
   return (
     <Container variant="default" style={styles.container}>
       <Container variant="default" style={styles.formContainer}>
@@ -45,17 +60,18 @@ const LoginForm: FC = () => {
           <FormInput title="Username" />
           <FormInput title="Password" secureTextEntry />
         </Container>
-        <Button style={styles.button}>
+        <Button style={styles.button} onPress={signUp}>
+          <Image source={playIcon} style={styles.playIcon} />
           <Typography color="white">Get Started</Typography>
         </Button>
       </Container>
       <View style={styles.text}>
         <Typography color="white">Not registered?</Typography>
-        <Pressable>
+        <Link href="/signup">
           <Typography color="white" underlined>
             Create Account
           </Typography>
-        </Pressable>
+        </Link>
       </View>
     </Container>
   )
