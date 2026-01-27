@@ -33,10 +33,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
   },
-  playIcon: {
-    height: 10,
-    width: 7,
-  },
   text: {
     flexDirection: "row",
     gap: "0.25em",
@@ -61,7 +57,7 @@ const LoginForm: FC = () => {
           <FormInput title="Password" secureTextEntry />
         </Container>
         <Button style={styles.button} onPress={signUp}>
-          <Image source={playIcon} style={styles.playIcon} />
+          <Image source={playIcon} />
           <Typography color="white">Get Started</Typography>
         </Button>
       </Container>
