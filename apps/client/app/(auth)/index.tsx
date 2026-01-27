@@ -28,7 +28,7 @@ const Signin: FC = () => {
     <View style={styles.container}>
       <Typography
         color="white"
-        size="xl-header"
+        size="xlheader"
         bold
         shadow
         style={styles.title}
