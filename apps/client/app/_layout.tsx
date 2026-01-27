@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
   root: {
     minWidth: 320,
     maxWidth: 750,
-    width: "100%",
   },
 })
 
