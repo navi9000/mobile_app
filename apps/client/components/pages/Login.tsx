@@ -1,7 +1,7 @@
 import { FC } from "react"
 import LoginForm from "../organisms/LoginForm/LoginForm"
 import MainBackground from "../atoms/MainBackground/MainBackground"
-import { Image, StyleSheet } from "react-native"
+import { Image, StyleSheet, View } from "react-native"
 import Typography from "../atoms/Typography/Typography"
 
 const styles = StyleSheet.create({
@@ -9,17 +9,17 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   title: {
-    position: "absolute",
-    top: 60,
     left: -4,
+    transform: "translateY(14px)",
   },
   img: {
-    position: "absolute",
-    top: 150,
-    left: "50%",
-    transform: "translate(-50%, 0) scale(0.5)",
-    transformOrigin: "top center",
     zIndex: -1,
+    alignSelf: "center",
+    transform: "translateY(-14px)",
+  },
+  brandContainer: {
+    flex: 1,
+    justifyContent: "center",
   },
 })
 
@@ -28,16 +28,18 @@ const Login: FC = () => {
 
   return (
     <MainBackground style={styles.container}>
-      <Typography
-        color="white"
-        size="xlheader"
-        bold
-        shadow
-        style={styles.title}
-      >
-        Chat
-      </Typography>
-      <Image source={speechBalloonSvg} style={styles.img} />
+      <View style={styles.brandContainer}>
+        <Typography
+          color="white"
+          size="xlheader"
+          bold
+          shadow
+          style={styles.title}
+        >
+          Chat
+        </Typography>
+        <Image source={speechBalloonSvg} style={styles.img} />
+      </View>
       <LoginForm />
     </MainBackground>
   )
