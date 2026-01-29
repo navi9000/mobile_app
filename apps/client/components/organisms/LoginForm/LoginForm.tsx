@@ -3,8 +3,9 @@ import Container from "@/components/atoms/Container/Container"
 import Typography from "@/components/atoms/Typography/Typography"
 import FormInput from "@/components/molecules/FormInput/FormInput"
 import { Link, useRouter } from "expo-router"
-import { FC } from "react"
+import { FC, useState } from "react"
 import { Image, StyleSheet, View } from "react-native"
+import { Auth } from "@/utils/auth"
 
 const styles = StyleSheet.create({
   container: {
@@ -44,17 +45,28 @@ const styles = StyleSheet.create({
 const LoginForm: FC = () => {
   const playIcon = require("@/assets/images/play.svg")
   const { navigate } = useRouter()
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
 
   const signUp = () => {
-    navigate("/")
+    if (!username) {
+      return
+    }
+    Auth.setAuth(username).then(() => {
+      navigate("/")
+    })
   }
 
   return (
     <Container variant="default" style={styles.container}>
       <Container variant="default" style={styles.formContainer}>
         <Container variant="form" style={styles.form}>
-          <FormInput title="Username" />
-          <FormInput title="Password" secureTextEntry />
+          <FormInput title="Username" onChangeText={setUsername} />
+          <FormInput
+            title="Password"
+            secureTextEntry
+            onChangeText={setPassword}
+          />
         </Container>
         <Button style={styles.button} onPress={signUp}>
           <Image source={playIcon} />
