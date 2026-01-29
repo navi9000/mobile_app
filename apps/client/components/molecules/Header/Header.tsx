@@ -13,6 +13,7 @@ type Props = {
   title: string
   leftIcon?: HeaderIconProps
   rightIcon?: HeaderIconProps
+  transparent?: boolean
 }
 
 const styles = StyleSheet.create({
@@ -22,11 +23,22 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
+  container_transparent: {
+    backgroundColor: "transparent",
+  },
 })
 
-const Header: FC<Resolve<Props>> = ({ title, leftIcon, rightIcon }) => {
+const Header: FC<Resolve<Props>> = ({
+  title,
+  leftIcon,
+  rightIcon,
+  transparent = false,
+}) => {
   return (
-    <Container variant="head" style={styles.container}>
+    <Container
+      variant="head"
+      style={[styles.container, transparent && styles.container_transparent]}
+    >
       <Pressable onPress={leftIcon?.onPress}>
         <Image source={leftIcon?.source} />
       </Pressable>
