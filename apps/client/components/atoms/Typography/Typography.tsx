@@ -3,7 +3,14 @@ import { ComponentProps, FC } from "react"
 import { StyleSheet, Text } from "react-native"
 
 type Color = "white" | "dark" | "theme"
-type Size = "xlheader" | "header" | "medium" | "regular" | "small" | "tiny"
+type Size =
+  | "xlheader"
+  | "header"
+  | "large"
+  | "medium"
+  | "regular"
+  | "small"
+  | "tiny"
 
 interface CommonProps {
   children: string
@@ -41,6 +48,10 @@ const styles = StyleSheet.create({
   text_sizeheader: {
     fontSize: 35,
     letterSpacing: -1.05,
+  },
+  text_sizelarge: {
+    fontSize: 25,
+    letterSpacing: -0.5,
   },
   text_sizemedium: {
     fontSize: 17,
