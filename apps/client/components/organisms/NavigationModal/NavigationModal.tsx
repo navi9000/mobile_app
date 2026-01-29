@@ -1,11 +1,13 @@
 import { FC } from "react"
 import { ImageProps, Modal, StyleSheet, View } from "react-native"
-import { Link } from "expo-router"
+import { Link, useRouter } from "expo-router"
 import MainBackground from "@/components/atoms/MainBackground/MainBackground"
 import Typography from "@/components/atoms/Typography/Typography"
-import LogoutButton from "../LogoutButton/LogoutButton"
+import LogoutButton from "../../molecules/LogoutButton/LogoutButton"
 import { Resolve } from "@/utils/types"
 import Header from "@/components/molecules/Header/Header"
+import Animated, { SlideInDown, SlideOutUp } from "react-native-reanimated"
+import { Auth } from "@/utils/auth"
 
 const styles = StyleSheet.create({
   container: {
@@ -22,13 +24,26 @@ const styles = StyleSheet.create({
 type Props = {
   source: ImageProps["source"]
   name: string
+  visible: boolean
   close: () => void
 }
 
-const NavigationModal: FC<Resolve<Props>> = ({ source, name, close }) => {
+const NavigationModal: FC<Resolve<Props>> = ({
+  source,
+  name,
+  close,
+  visible,
+}) => {
   const crossIcon = require("@/assets/images/cross.svg")
+  const { navigate } = useRouter()
+
+  const logout = async () => {
+    close()
+    await Auth.clear()
+    navigate("/signin")
+  }
   return (
-    <Modal>
+    <Modal animationType="slide" visible={visible}>
       <MainBackground style={styles.container}>
         <Header
           title=""
@@ -42,7 +57,7 @@ const NavigationModal: FC<Resolve<Props>> = ({ source, name, close }) => {
             </Typography>
           </Link>
         </View>
-        <LogoutButton source={source} name={name} />
+        <LogoutButton source={source} name={name} onPress={logout} />
       </MainBackground>
     </Modal>
   )

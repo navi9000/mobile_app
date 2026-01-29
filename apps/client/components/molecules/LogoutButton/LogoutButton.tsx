@@ -5,37 +5,36 @@ import { Auth } from "@/utils/auth"
 import { Resolve } from "@/utils/types"
 import { useRouter } from "expo-router"
 import { FC } from "react"
-import { ImageProps, Pressable, StyleSheet } from "react-native"
+import {
+  GestureResponderEvent,
+  ImageProps,
+  Pressable,
+  StyleSheet,
+} from "react-native"
 
 type Props = {
   source: ImageProps["source"]
   name: string
+  onPress?: (event: GestureResponderEvent) => void
 }
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    width: "100%",
   },
   textContainer: {
     flex: 1,
     backgroundColor: "#000",
-    paddingBlock: "auto",
+    paddingBlock: 0,
     justifyContent: "center",
     gap: 4,
+    height: 80,
   },
 })
 
-const LogoutButton: FC<Resolve<Props>> = ({ source, name }) => {
-  const { navigate } = useRouter()
-
-  const logout = async () => {
-    await Auth.clear()
-    navigate("/signin")
-  }
-
+const LogoutButton: FC<Resolve<Props>> = ({ source, name, onPress }) => {
   return (
-    <Pressable style={styles.container} onPress={logout}>
+    <Pressable style={styles.container} onPress={onPress}>
       <Container variant="form" style={styles.textContainer}>
         <Typography color="white" size="large" bold>
           Logout

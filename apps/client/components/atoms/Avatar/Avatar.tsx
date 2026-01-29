@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
   },
   image: {
     aspectRatio: 1,
+    height: "auto",
   },
   image_profile: {
     width: "100%",

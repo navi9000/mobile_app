@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react-native-web-vite"
 import component from "./LogoutButton"
 
 const meta = {
-  title: "Organisms/LogoutButton",
+  title: "Molecules/LogoutButton",
   component,
   args: {
     source: require("@/assets/images/provided_avatar.png"),
