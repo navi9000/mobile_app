@@ -12,6 +12,6 @@ describe("Typography", () => {
     expect(getByText("Hello")).toBeInTheDocument()
   })
   test("basic test", () => {
-    expect(true).toBeTruthy()
+    expect(true).not.toBeTruthy()
   })
 })
