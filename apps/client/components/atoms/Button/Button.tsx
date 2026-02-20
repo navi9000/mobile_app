@@ -1,8 +1,8 @@
 import { ComponentProps, FC } from "react"
-import { Pressable } from "react-native"
+import { Pressable, PressableProps } from "react-native"
 
-const Button: FC<ComponentProps<typeof Pressable>> = ({ style, ...rest }) => {
-  return <Pressable {...rest} />
+const Button: FC<PressableProps> = ({ style, ...rest }) => {
+  return <Pressable style={style} {...rest} />
 }
 
 export default Button

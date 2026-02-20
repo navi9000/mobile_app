@@ -1,27 +1,34 @@
 import { FC, PropsWithChildren } from "react"
-import { ImageBackground, StyleSheet, View } from "react-native"
+import {
+  ImageBackground,
+  StyleProp,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+  ViewStyle,
+} from "react-native"
 
 const styles = StyleSheet.create({
   img: {
-    flex: 1,
-    width: "100%",
-    height: "100%",
     minWidth: 320,
     maxWidth: 750,
-    top: 0,
-    left: 0,
-    justifyContent: "center",
+    width: "100%",
+  },
+  inlay: {
+    width: "100%",
+    overflow: "hidden",
   },
 })
 
-const MainBackground: FC<PropsWithChildren> = ({ children }) => {
+const MainBackground: FC<
+  PropsWithChildren<{ style?: StyleProp<ViewStyle> }>
+> = ({ children, style }) => {
+  const source = require("@/assets/images/main_background.svg")
+  const { height } = useWindowDimensions()
+
   return (
-    <ImageBackground
-      source={require("@/assets/images/main_background.svg")}
-      resizeMode="cover"
-      style={styles.img}
-    >
-      {children}
+    <ImageBackground source={source} resizeMode="cover" style={styles.img}>
+      <View style={[styles.inlay, { height }, style]}>{children}</View>
     </ImageBackground>
   )
 }

@@ -1,45 +1,86 @@
 import Button from "@/components/atoms/Button/Button"
 import Container from "@/components/atoms/Container/Container"
+import Typography from "@/components/atoms/Typography/Typography"
 import FormInput from "@/components/molecules/FormInput/FormInput"
-import { FC } from "react"
-import { Pressable, StyleSheet, Text, View } from "react-native"
+import { Link, useRouter } from "expo-router"
+import { FC, useState } from "react"
+import { Image, StyleSheet, View } from "react-native"
+import { Auth } from "@/utils/auth"
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#000",
     position: "relative",
-    height: 240,
+    height: 300,
     justifyContent: "flex-end",
   },
   formContainer: {
     position: "absolute",
-    bottom: 28,
+    bottom: 48,
     left: 0,
   },
-  text: {
-    color: "#fff",
-    textAlign: "center",
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 40,
   },
   button: {
     backgroundColor: "#00a0ff",
     paddingInline: 40,
     paddingBlock: 20,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+  },
+  text: {
+    flexDirection: "row",
+    gap: "0.25em",
+    justifyContent: "center",
+    alignItems: "center",
   },
 })
 
 const LoginForm: FC = () => {
+  const playIcon = require("@/assets/images/play.svg")
+  const { navigate } = useRouter()
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+
+  const signUp = () => {
+    if (!username) {
+      return
+    }
+    Auth.setAuth(username).then(() => {
+      navigate("/")
+    })
+  }
+
   return (
     <Container variant="default" style={styles.container}>
       <Container variant="default" style={styles.formContainer}>
-        <Container variant="form">
-          <FormInput title="Username" />
-          <FormInput title="Password" secureTextEntry />
+        <Container variant="form" style={styles.form}>
+          <FormInput title="Username" onChangeText={setUsername} />
+          <FormInput
+            title="Password"
+            secureTextEntry
+            onChangeText={setPassword}
+          />
         </Container>
-        <Button style={styles.button}>Get Started</Button>
+        <Button style={styles.button} onPress={signUp}>
+          <Image source={playIcon} />
+          <Typography color="white">Get Started</Typography>
+        </Button>
       </Container>
-      <Text style={styles.text}>
-        Not registered? <Pressable>Create Account</Pressable>
-      </Text>
+      <View style={styles.text}>
+        <Typography color="white">Not registered?</Typography>
+        <Link href="/signup">
+          <Typography color="white" underlined>
+            Create Account
+          </Typography>
+        </Link>
+      </View>
     </Container>
   )
 }
