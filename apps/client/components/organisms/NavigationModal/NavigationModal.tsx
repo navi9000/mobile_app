@@ -6,7 +6,6 @@ import Typography from "@/components/atoms/Typography/Typography"
 import LogoutButton from "../../molecules/LogoutButton/LogoutButton"
 import { Resolve } from "@/utils/types"
 import Header from "@/components/molecules/Header/Header"
-import Animated, { SlideInDown, SlideOutUp } from "react-native-reanimated"
 import { Auth } from "@/utils/auth"
 
 const styles = StyleSheet.create({
@@ -51,9 +50,14 @@ const NavigationModal: FC<Resolve<Props>> = ({
           transparent
         />
         <View style={styles.list}>
-          <Link href="/">
+          <Link href="/" onPress={close}>
             <Typography size="header" color="white">
               Home
+            </Typography>
+          </Link>
+          <Link href="/profile" onPress={close}>
+            <Typography size="header" color="white">
+              Profile
             </Typography>
           </Link>
         </View>

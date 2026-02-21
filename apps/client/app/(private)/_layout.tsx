@@ -46,6 +46,20 @@ const PrivateLayout: FC = () => {
             ),
           }}
         />
+        <Stack.Screen
+          name="profile"
+          options={{
+            header: () => (
+              <Header
+                title="Profile"
+                leftIcon={{
+                  source: burgerIcon,
+                  onPress: () => setNavigationIsVisible(true),
+                }}
+              />
+            ),
+          }}
+        />
       </Stack>
       <NavigationModal
         source={avatarIcon}
