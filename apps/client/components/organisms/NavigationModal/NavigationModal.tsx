@@ -1,12 +1,12 @@
 import { FC } from "react"
 import { ImageProps, Modal, StyleSheet, View } from "react-native"
-import { Link, useRouter } from "expo-router"
+import { LinkProps, useRouter } from "expo-router"
 import MainBackground from "@/components/atoms/MainBackground/MainBackground"
-import Typography from "@/components/atoms/Typography/Typography"
 import LogoutButton from "../../molecules/LogoutButton/LogoutButton"
 import { Resolve } from "@/utils/types"
 import Header from "@/components/molecules/Header/Header"
 import { Auth } from "@/utils/auth"
+import NavItem from "@/components/molecules/NavItem/NavItem"
 
 const styles = StyleSheet.create({
   container: {
@@ -26,6 +26,22 @@ type Props = {
   visible: boolean
   close: () => void
 }
+
+type NavigationItem = {
+  title: string
+  href: LinkProps["href"]
+}
+
+const navigationItems: NavigationItem[] = [
+  {
+    title: "Home",
+    href: "/",
+  },
+  {
+    title: "Profile",
+    href: "/profile",
+  },
+]
 
 const NavigationModal: FC<Resolve<Props>> = ({
   source,
@@ -50,16 +66,9 @@ const NavigationModal: FC<Resolve<Props>> = ({
           transparent
         />
         <View style={styles.list}>
-          <Link href="/" onPress={close}>
-            <Typography size="header" color="white">
-              Home
-            </Typography>
-          </Link>
-          <Link href="/profile" onPress={close}>
-            <Typography size="header" color="white">
-              Profile
-            </Typography>
-          </Link>
+          {navigationItems.map((item, index) => (
+            <NavItem key={index} index={index} onPress={close} {...item} />
+          ))}
         </View>
         <LogoutButton source={source} name={name} onPress={logout} />
       </MainBackground>

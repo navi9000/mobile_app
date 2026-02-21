@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#00A0FF",
     justifyContent: "space-around",
   },
-
   counters: {
     flexDirection: "row",
     justifyContent: "space-between",
