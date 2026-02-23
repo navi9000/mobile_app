@@ -7,7 +7,7 @@ import { ImageProps, StyleSheet, View } from "react-native"
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "flex-end",
+    flex: 1,
   },
   list: {
     flex: 1,
@@ -45,7 +45,6 @@ const NavigationModal: FC<Props> = () => {
   const { username } = useLocalSearchParams()
 
   const logout = async () => {
-    // close()
     await Auth.clear()
     navigate("/signin")
   }
@@ -54,14 +53,14 @@ const NavigationModal: FC<Props> = () => {
   const name = typeof username === "string" ? username : username[0]
 
   return (
-    <>
+    <View style={styles.container}>
       <View style={styles.list}>
         {navigationItems.map((item, index) => (
-          <NavItem key={index} index={index} onPress={() => {}} {...item} />
+          <NavItem key={index} index={index} {...item} />
         ))}
       </View>
       <LogoutButton source={source} name={name} onPress={logout} />
-    </>
+    </View>
   )
 }
 

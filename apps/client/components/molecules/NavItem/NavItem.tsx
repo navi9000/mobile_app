@@ -1,4 +1,4 @@
-import { LinkProps, usePathname } from "expo-router"
+import { LinkProps, useLocalSearchParams } from "expo-router"
 import { FC } from "react"
 import Animated, { SlideInLeft } from "react-native-reanimated"
 import { Link } from "expo-router"
@@ -7,21 +7,19 @@ import Typography from "@/components/atoms/Typography/Typography"
 
 type Props = {
   href: LinkProps["href"]
-  onPress: LinkProps["onPress"]
   title: string
   index: number
 }
 
-const NavItem: FC<Resolve<Props>> = ({ href, onPress, title, index }) => {
-  const currentPathname = usePathname()
-  const isActive = currentPathname === href
+const NavItem: FC<Resolve<Props>> = ({ href, title, index }) => {
+  const { activePathname } = useLocalSearchParams()
+  const isActive = activePathname === href
 
   return (
     <Animated.View entering={SlideInLeft.duration(500).delay(index * 100)}>
       <Link
         href={href}
-        onPress={isActive ? undefined : onPress}
-        disabled={isActive}
+        style={isActive ? { pointerEvents: "none" } : undefined}
       >
         <Typography size="header" color={isActive ? "theme" : "white"}>
           {title}
