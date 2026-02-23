@@ -6,6 +6,7 @@ import "react-native-reanimated"
 import { Karla_400Regular, Karla_700Bold } from "@expo-google-fonts/karla"
 import MainBackground from "@/components/atoms/MainBackground/MainBackground"
 import { StyleSheet, View } from "react-native"
+import { ThemeProvider, DefaultTheme } from "@react-navigation/native"
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -49,17 +50,33 @@ export default function RootLayout() {
   }
 
   return (
-    <View style={styles.root}>
-      <RootLayoutNav />
-    </View>
+    <MainBackground>
+      <ThemeProvider
+        value={{
+          ...DefaultTheme,
+          colors: { ...DefaultTheme.colors, background: "transparent" },
+        }}
+      >
+        <RootLayoutNav />
+      </ThemeProvider>
+    </MainBackground>
   )
 }
 
 function RootLayoutNav() {
   return (
-    <Stack>
+    <Stack
+      screenOptions={{
+        contentStyle: { backgroundColor: "transparent" },
+      }}
+    >
       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-      <Stack.Screen name="(private)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="(private)"
+        options={{
+          headerShown: false,
+        }}
+      />
       {/* <Stack.Screen name="modal" options={{ presentation: 'modal' }} /> */}
     </Stack>
   )

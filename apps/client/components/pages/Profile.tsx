@@ -1,5 +1,4 @@
 import { FC } from "react"
-import MainBackground from "../atoms/MainBackground/MainBackground"
 import Container from "../atoms/Container/Container"
 import Avatar from "../atoms/Avatar/Avatar"
 import { StyleSheet } from "react-native"
@@ -26,16 +25,14 @@ const ProfilePage: FC = () => {
     likes: 1690,
   }
   return (
-    <MainBackground>
-      <Container variant="default" style={styles.container}>
-        <Avatar
-          source={require("@/assets/images/provided_avatar.png")}
-          size="profile"
-          style={styles.avatar}
-        />
-        <PersonalInfo style={styles.contents} {...personalInfo} />
-      </Container>
-    </MainBackground>
+    <Container variant="default" style={styles.container}>
+      <Avatar
+        source={require("@/assets/images/provided_avatar.png")}
+        size="profile"
+        style={styles.avatar}
+      />
+      <PersonalInfo style={styles.contents} {...personalInfo} />
+    </Container>
   )
 }
 

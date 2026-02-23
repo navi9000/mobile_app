@@ -1,6 +1,5 @@
 import { FC } from "react"
 import LoginForm from "../organisms/LoginForm/LoginForm"
-import MainBackground from "../atoms/MainBackground/MainBackground"
 import { Image, StyleSheet, View } from "react-native"
 import Typography from "../atoms/Typography/Typography"
 
@@ -27,7 +26,7 @@ const Login: FC = () => {
   const speechBalloonSvg = require("@/assets/images/speech_balloon.svg")
 
   return (
-    <MainBackground style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.brandContainer}>
         <Typography
           color="white"
@@ -41,7 +40,7 @@ const Login: FC = () => {
         <Image source={speechBalloonSvg} style={styles.img} />
       </View>
       <LoginForm />
-    </MainBackground>
+    </View>
   )
 }
 
