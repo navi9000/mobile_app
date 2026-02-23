@@ -2,7 +2,7 @@ import Header from "@/components/molecules/Header/Header"
 import { Auth } from "@/utils/auth"
 import { Stack, usePathname, useRouter } from "expo-router"
 import { FC, useEffect, useState } from "react"
-import { ActivityIndicator } from "react-native"
+import { ActivityIndicator, View } from "react-native"
 
 const PrivateLayout: FC = () => {
   const burgerIcon = require("@/assets/images/burger.svg")
@@ -25,7 +25,17 @@ const PrivateLayout: FC = () => {
   }, [])
 
   if (!isLoaded) {
-    return <ActivityIndicator />
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator />
+      </View>
+    )
   }
 
   const openModal = () => {
@@ -40,53 +50,49 @@ const PrivateLayout: FC = () => {
   }
 
   return (
-    <>
-      <Stack
-        screenOptions={{ contentStyle: { backgroundColor: "transparent" } }}
-      >
-        <Stack.Screen
-          name="index"
-          options={{
-            header: () => (
-              <Header
-                title={`Hi, ${username}`}
-                leftIcon={{
-                  source: burgerIcon,
-                  onPress: openModal,
-                }}
-              />
-            ),
-          }}
-        />
-        <Stack.Screen
-          name="profile"
-          options={{
-            header: () => (
-              <Header
-                title="Profile"
-                leftIcon={{
-                  source: burgerIcon,
-                  onPress: openModal,
-                }}
-              />
-            ),
-          }}
-        />
-        <Stack.Screen
-          name="navigationmodal"
-          options={{
-            presentation: "modal",
-            header: () => (
-              <Header
-                title=""
-                leftIcon={{ source: crossIcon, onPress: back }}
-                transparent
-              />
-            ),
-          }}
-        />
-      </Stack>
-    </>
+    <Stack screenOptions={{ contentStyle: { backgroundColor: "transparent" } }}>
+      <Stack.Screen
+        name="index"
+        options={{
+          header: () => (
+            <Header
+              title={`Hi, ${username}`}
+              leftIcon={{
+                source: burgerIcon,
+                onPress: openModal,
+              }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="profile"
+        options={{
+          header: () => (
+            <Header
+              title="Profile"
+              leftIcon={{
+                source: burgerIcon,
+                onPress: openModal,
+              }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="navigationmodal"
+        options={{
+          presentation: "modal",
+          header: () => (
+            <Header
+              title=""
+              leftIcon={{ source: crossIcon, onPress: back }}
+              transparent
+            />
+          ),
+        }}
+      />
+    </Stack>
   )
 }
 
