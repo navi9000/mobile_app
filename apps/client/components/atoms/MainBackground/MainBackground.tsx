@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     minWidth: 320,
     maxWidth: 750,
     flex: 1,
+    overflow: "hidden",
   },
 })
 

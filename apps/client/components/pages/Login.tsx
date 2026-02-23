@@ -5,6 +5,7 @@ import Typography from "../atoms/Typography/Typography"
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: "flex-end",
   },
   title: {

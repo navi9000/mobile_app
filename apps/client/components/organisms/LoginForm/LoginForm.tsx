@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: "0.25em",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-end",
   },
 })
 
