@@ -2,7 +2,7 @@ import Container from "@/components/atoms/Container/Container"
 import LabelWithIcon from "@/components/molecules/LabelWithIcon/LabelWithIcon"
 import NewMessage from "@/components/molecules/NewMessage/NewMessage"
 import { FC } from "react"
-import { StyleSheet, View } from "react-native"
+import { StyleSheet } from "react-native"
 
 const styles = StyleSheet.create({
   container: {
