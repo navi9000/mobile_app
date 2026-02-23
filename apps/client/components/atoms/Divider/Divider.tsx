@@ -1,9 +1,10 @@
 import { Resolve } from "@/utils/types"
 import { FC } from "react"
-import { StyleSheet, View } from "react-native"
+import { StyleSheet, View, ViewProps } from "react-native"
 
 type Props = {
   color: string
+  style?: ViewProps["style"]
 }
 
 const styles = StyleSheet.create({
@@ -13,8 +14,10 @@ const styles = StyleSheet.create({
   },
 })
 
-const Divider: FC<Resolve<Props>> = ({ color = "black" }) => {
-  return <View style={[styles.divider, { backgroundColor: color }]}></View>
+const Divider: FC<Resolve<Props>> = ({ color = "black", style }) => {
+  return (
+    <View style={[styles.divider, { backgroundColor: color }, style]}></View>
+  )
 }
 
 export default Divider
