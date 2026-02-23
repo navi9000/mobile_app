@@ -1,14 +1,8 @@
-import Typography from "@/components/atoms/Typography/Typography"
+import HomePage from "@/components/pages/Home"
 import { FC } from "react"
 
 const Home: FC = () => {
-  // return (
-  //   <LabelWithIcon
-  //     text="new message"
-  //     iconSource={require("@/assets/images/bell.svg")}
-  //   />
-  // )
-  return <Typography>Home</Typography>
+  return <HomePage />
 }
 
 export default Home

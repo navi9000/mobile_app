@@ -1,5 +1,6 @@
 import { FC } from "react"
 import { StyleSheet, View } from "react-native"
+import HomeMessages from "../organisms/HomeMessages/HomeMessages"
 
 const styles = StyleSheet.create({
   container: {
@@ -8,7 +9,11 @@ const styles = StyleSheet.create({
 })
 
 const HomePage: FC = () => {
-  return <View style={styles.container}></View>
+  return (
+    <View style={styles.container}>
+      <HomeMessages />
+    </View>
+  )
 }
 
 export default HomePage
