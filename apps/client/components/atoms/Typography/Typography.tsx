@@ -19,6 +19,7 @@ interface CommonProps {
   bold?: boolean
   shadow?: boolean
   underlined?: boolean
+  letterSpacing?: number
 }
 
 const styles = StyleSheet.create({
@@ -89,6 +90,7 @@ const Typography: FC<Resolve<CommonProps & ComponentProps<typeof Text>>> = ({
   shadow,
   color = "dark",
   underlined,
+  letterSpacing = 0,
   ...rest
 }) => {
   return (
@@ -100,6 +102,9 @@ const Typography: FC<Resolve<CommonProps & ComponentProps<typeof Text>>> = ({
         !!size && styles[`text_size${size}`],
         shadow && styles.text_shadow,
         underlined && styles.text_underlined,
+        // {
+        //   letterSpacing,
+        // },
         style,
       ]}
       {...rest}
