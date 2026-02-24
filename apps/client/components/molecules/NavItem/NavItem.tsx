@@ -17,10 +17,7 @@ const NavItem: FC<Resolve<Props>> = ({ href, title, index }) => {
 
   return (
     <Animated.View entering={SlideInLeft.duration(500).delay(index * 100)}>
-      <Link
-        href={href}
-        style={isActive ? { pointerEvents: "none" } : undefined}
-      >
+      <Link href={href} style={isActive && { pointerEvents: "none" }}>
         <Typography
           fontSize={35}
           letterSpacing={-0.5}
