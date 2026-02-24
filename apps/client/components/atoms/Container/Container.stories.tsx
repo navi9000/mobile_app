@@ -15,7 +15,7 @@ const Inlay: FC = () => {
         backgroundColor: "beige",
       }}
     >
-      <Typography size="regular">Inlay</Typography>
+      <Typography fontSize={16}>Inlay</Typography>
     </View>
   )
 }

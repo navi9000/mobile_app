@@ -36,10 +36,10 @@ const LogoutButton: FC<Resolve<Props>> = ({ source, name, onPress }) => {
   return (
     <Pressable style={styles.container} onPress={onPress}>
       <Container variant="form" style={styles.textContainer}>
-        <Typography color="white" size="large" bold>
+        <Typography color="white" fontSize={25} letterSpacing={-0.8} bold>
           Logout
         </Typography>
-        <Typography color="theme" size="tiny" bold>
+        <Typography color="theme" fontSize={10} letterSpacing={0.5} bold>
           {name.toUpperCase()}
         </Typography>
       </Container>

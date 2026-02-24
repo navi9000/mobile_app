@@ -39,10 +39,15 @@ const NewMessage: FC<Resolve<Props>> = ({ img, name, timePassed }) => {
       <Avatar source={img} size="lg" />
       <Container variant="default" style={styles.inlay}>
         <View style={styles.textContainer}>
-          <Typography color="dark" bold style={{ fontSize: 12 }}>
+          <Typography color="dark" bold fontSize={12}>
             {name}
           </Typography>
-          <Typography color="theme" size="tiny" bold style={styles.timePassed}>
+          <Typography
+            color="theme"
+            fontSize={10}
+            bold
+            style={styles.timePassed}
+          >
             {timePassed}
           </Typography>
         </View>

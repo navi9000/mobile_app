@@ -42,7 +42,7 @@ const Header: FC<Resolve<Props>> = ({
       <Pressable onPress={leftIcon?.onPress}>
         <Image source={leftIcon?.source} />
       </Pressable>
-      <Typography color="white" size="header">
+      <Typography color="white" fontSize={17}>
         {title}
       </Typography>
       <Pressable onPress={rightIcon?.onPress}>

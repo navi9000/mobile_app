@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
 const ProfileCounter: FC<Resolve<Props>> = ({ title, value }) => {
   return (
     <View style={styles.container}>
-      <Typography color="white" size="large" bold>
+      <Typography color="white" fontSize={25} bold>
         {formatLargeNumber(value)}
       </Typography>
-      <Typography color="white" size="tiny" bold>
+      <Typography color="white" fontSize={10} letterSpacing={1} bold>
         {title.toUpperCase()}
       </Typography>
     </View>

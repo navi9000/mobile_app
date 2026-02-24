@@ -31,7 +31,8 @@ const Login: FC = () => {
       <View style={styles.brandContainer}>
         <Typography
           color="white"
-          size="xlheader"
+          fontSize={100}
+          letterSpacing={-5}
           bold
           shadow
           style={styles.title}

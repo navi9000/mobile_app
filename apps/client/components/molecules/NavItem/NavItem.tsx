@@ -21,7 +21,12 @@ const NavItem: FC<Resolve<Props>> = ({ href, title, index }) => {
         href={href}
         style={isActive ? { pointerEvents: "none" } : undefined}
       >
-        <Typography size="header" color={isActive ? "theme" : "white"}>
+        <Typography
+          fontSize={35}
+          letterSpacing={-0.5}
+          bold
+          color={isActive ? "theme10" : "white"}
+        >
           {title}
         </Typography>
       </Link>

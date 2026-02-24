@@ -49,25 +49,14 @@ const ChatPreview: FC<Resolve<Props>> = ({
         <Avatar size="xs" source={img} />
         <View style={styles.inlay}>
           <View style={styles.topRow}>
-            <Typography
-              color="dark"
-              bold
-              style={{ fontSize: 12, letterSpacing: 0 }}
-            >
+            <Typography color="dark" bold fontSize={12}>
               {name}
             </Typography>
-            <Typography
-              color="theme"
-              size="tiny"
-              bold
-              style={{ letterSpacing: 0 }}
-            >
+            <Typography color="theme" bold fontSize={10}>
               {timePassed}
             </Typography>
           </View>
-          <Typography
-            style={{ letterSpacing: 0, fontSize: 13, color: "#050706" }}
-          >
+          <Typography fontSize={13} color="dark10">
             {lastMessage}
           </Typography>
         </View>

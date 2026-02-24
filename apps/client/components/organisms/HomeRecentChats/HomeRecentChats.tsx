@@ -23,7 +23,7 @@ const TEMP_DATA = Array.from({ length: 10 }, () => ({
 const HomeRecentChats: FC = () => {
   return (
     <Container variant="default" style={styles.container}>
-      <Typography color="white" size="tiny" bold>
+      <Typography color="white" fontSize={10} letterSpacing={1} bold>
         {"Recent chats".toUpperCase()}
       </Typography>
       <FlatList

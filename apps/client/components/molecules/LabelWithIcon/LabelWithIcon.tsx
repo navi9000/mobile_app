@@ -19,16 +19,13 @@ const styles = StyleSheet.create({
     height: 25,
     width: 25,
   },
-  text: {
-    letterSpacing: 1,
-  },
 })
 
 const LabelWithIcon: FC<Resolve<Props>> = ({ iconSource, text }) => {
   return (
     <View style={styles.container}>
       <Image source={iconSource} style={styles.icon} />
-      <Typography color="white" size="small" style={styles.text}>
+      <Typography color="white" fontSize={11} letterSpacing={1.1}>
         {text.toUpperCase()}
       </Typography>
     </View>

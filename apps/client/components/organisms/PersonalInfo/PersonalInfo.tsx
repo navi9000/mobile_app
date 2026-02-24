@@ -4,7 +4,7 @@ import Typography from "@/components/atoms/Typography/Typography"
 import ProfileCounter from "@/components/molecules/ProfileCounter/ProfileCounter"
 import { Resolve } from "@/utils/types"
 import { FC } from "react"
-import { StyleSheet, View, ViewProps } from "react-native"
+import { StyleSheet, View, type ViewProps } from "react-native"
 
 type Props = {
   location: string
@@ -37,10 +37,10 @@ const PersonalInfo: FC<Resolve<Props>> = ({
   return (
     <Container style={[styles.container, style]} variant="default">
       <View>
-        <Typography size="regular" color="white">
+        <Typography fontSize={14} color="white">
           {occupation}
         </Typography>
-        <Typography size="regular" color="white">
+        <Typography fontSize={14} color="white">
           {location}
         </Typography>
       </View>
