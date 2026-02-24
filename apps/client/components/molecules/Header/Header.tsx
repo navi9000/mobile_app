@@ -26,6 +26,10 @@ const styles = StyleSheet.create({
   container_transparent: {
     backgroundColor: "transparent",
   },
+  icon: {
+    height: 25,
+    width: 25,
+  },
 })
 
 const Header: FC<Resolve<Props>> = ({
@@ -39,14 +43,14 @@ const Header: FC<Resolve<Props>> = ({
       variant="head"
       style={[styles.container, transparent && styles.container_transparent]}
     >
-      <Pressable onPress={leftIcon?.onPress}>
-        <Image source={leftIcon?.source} />
+      <Pressable onPress={leftIcon?.onPress} style={styles.icon}>
+        <Image source={leftIcon?.source} style={styles.icon} />
       </Pressable>
       <Typography color="white" fontSize={17}>
         {title}
       </Typography>
-      <Pressable onPress={rightIcon?.onPress}>
-        <Image source={rightIcon?.source} />
+      <Pressable onPress={rightIcon?.onPress} style={styles.icon}>
+        <Image source={rightIcon?.source} style={styles.icon} />
       </Pressable>
     </Container>
   )
