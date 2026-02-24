@@ -1,6 +1,5 @@
 import Avatar from "@/components/atoms/Avatar/Avatar"
 import Container from "@/components/atoms/Container/Container"
-import Divider from "@/components/atoms/Divider/Divider"
 import Typography from "@/components/atoms/Typography/Typography"
 import { Resolve } from "@/utils/types"
 import { FC } from "react"
@@ -17,10 +16,17 @@ type Props = {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#ffffff",
+    paddingBottom: 0,
   },
   innerContainer: {
     flexDirection: "row",
     gap: 20,
+    paddingBottom: 27,
+    boxSizing: "content-box",
+  },
+  innerContainer_notlast: {
+    borderBottomColor: "#000000",
+    borderBottomWidth: 1,
   },
   inlay: {
     flex: 1,
@@ -30,9 +36,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
-  },
-  divider: {
-    transform: [{ translateY: 27 }],
   },
 })
 
@@ -45,7 +48,12 @@ const ChatPreview: FC<Resolve<Props>> = ({
 }) => {
   return (
     <Container variant="default" style={styles.container}>
-      <View style={styles.innerContainer}>
+      <View
+        style={[
+          styles.innerContainer,
+          !isLast && styles.innerContainer_notlast,
+        ]}
+      >
         <Avatar size="xs" source={img} />
         <View style={styles.inlay}>
           <View style={styles.topRow}>
@@ -61,7 +69,6 @@ const ChatPreview: FC<Resolve<Props>> = ({
           </Typography>
         </View>
       </View>
-      {!isLast && <Divider color="#000000" style={styles.divider} />}
     </Container>
   )
 }
