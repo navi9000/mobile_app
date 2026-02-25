@@ -5,7 +5,7 @@ import { useEffect } from "react"
 import "react-native-reanimated"
 import { Karla_400Regular, Karla_700Bold } from "@expo-google-fonts/karla"
 import MainBackground from "@/components/atoms/MainBackground/MainBackground"
-import { StyleSheet, View } from "react-native"
+import { ThemeProvider, DefaultTheme } from "@react-navigation/native"
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -19,13 +19,6 @@ export const unstable_settings = {
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync()
-
-const styles = StyleSheet.create({
-  root: {
-    minWidth: 320,
-    maxWidth: 750,
-  },
-})
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
@@ -49,18 +42,27 @@ export default function RootLayout() {
   }
 
   return (
-    <View style={styles.root}>
-      <RootLayoutNav />
-    </View>
-  )
-}
-
-function RootLayoutNav() {
-  return (
-    <Stack>
-      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-      <Stack.Screen name="(private)" options={{ headerShown: false }} />
-      {/* <Stack.Screen name="modal" options={{ presentation: 'modal' }} /> */}
-    </Stack>
+    <MainBackground>
+      <ThemeProvider
+        value={{
+          ...DefaultTheme,
+          colors: { ...DefaultTheme.colors, background: "transparent" },
+        }}
+      >
+        <Stack
+          screenOptions={{
+            contentStyle: { backgroundColor: "transparent" },
+          }}
+        >
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="(private)"
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack>
+      </ThemeProvider>
+    </MainBackground>
   )
 }

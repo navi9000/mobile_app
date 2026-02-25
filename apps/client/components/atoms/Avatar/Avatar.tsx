@@ -1,6 +1,6 @@
 import { Resolve } from "@/utils/types"
 import { FC } from "react"
-import { Image, ImageProps, StyleSheet, View } from "react-native"
+import { Image, ImageProps, StyleSheet, View, ViewProps } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 
 const styles = StyleSheet.create({
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
   image_profile: {
     width: "100%",
-    aspectRatio: 1.14,
+    height: "100%",
   },
   image_lg: {
     width: 100,
@@ -41,11 +41,12 @@ type AvatarSize = "profile" | "lg" | "md" | "sm" | "xs"
 type Props = {
   source: ImageProps["source"]
   size: AvatarSize
+  style?: ViewProps["style"]
 }
 
-const Avatar: FC<Resolve<Props>> = ({ source, size }) => {
+const Avatar: FC<Resolve<Props>> = ({ source, size, style }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <Image
         source={source}
         style={[styles.image, !!size && styles[`image_${size}`]]}

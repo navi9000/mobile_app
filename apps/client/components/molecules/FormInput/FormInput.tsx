@@ -14,7 +14,7 @@ const FormInput: FC<Resolve<Props> & ComponentProps<typeof Input>> = ({
 }) => {
   return (
     <View>
-      <Typography color="theme" size="tiny" bold>
+      <Typography color="theme" fontSize={10} letterSpacing={1} bold>
         {title.toUpperCase()}
       </Typography>
       <Input {...inputProps} />

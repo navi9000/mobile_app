@@ -2,23 +2,16 @@ import { Resolve } from "@/utils/types"
 import { ComponentProps, FC } from "react"
 import { StyleSheet, Text } from "react-native"
 
-type Color = "white" | "dark" | "theme"
-type Size =
-  | "xlheader"
-  | "header"
-  | "large"
-  | "medium"
-  | "regular"
-  | "small"
-  | "tiny"
+type Color = "white" | "dark" | "dark10" | "theme" | "theme10"
 
 interface CommonProps {
   children: string
   color?: Color
-  size?: Size
   bold?: boolean
   shadow?: boolean
   underlined?: boolean
+  letterSpacing?: number
+  fontSize?: number
 }
 
 const styles = StyleSheet.create({
@@ -37,37 +30,14 @@ const styles = StyleSheet.create({
   text_colordark: {
     color: "#000",
   },
+  text_colordark10: {
+    color: "#050706",
+  },
   text_colortheme: {
     color: "#ad807d",
   },
-  // size
-  text_sizexlheader: {
-    fontSize: 100,
-    letterSpacing: -5,
-  },
-  text_sizeheader: {
-    fontSize: 35,
-    letterSpacing: -1.05,
-  },
-  text_sizelarge: {
-    fontSize: 25,
-    letterSpacing: -0.5,
-  },
-  text_sizemedium: {
-    fontSize: 17,
-    letterSpacing: -0.5,
-  },
-  text_sizeregular: {
-    fontSize: 15,
-    letterSpacing: -0.5,
-  },
-  text_sizesmall: {
-    fontSize: 11,
-    letterSpacing: -0.5,
-  },
-  text_sizetiny: {
-    fontSize: 10,
-    letterSpacing: -0.5,
+  text_colortheme10: {
+    color: "#ffbdb8",
   },
   // shadow
   text_shadow: {
@@ -85,10 +55,11 @@ const Typography: FC<Resolve<CommonProps & ComponentProps<typeof Text>>> = ({
   children,
   style,
   bold,
-  size,
   shadow,
   color = "dark",
   underlined,
+  letterSpacing,
+  fontSize,
   ...rest
 }) => {
   return (
@@ -97,9 +68,12 @@ const Typography: FC<Resolve<CommonProps & ComponentProps<typeof Text>>> = ({
         styles.text,
         bold && styles.text_bold,
         !!color && styles[`text_color${color}`],
-        !!size && styles[`text_size${size}`],
         shadow && styles.text_shadow,
         underlined && styles.text_underlined,
+        {
+          letterSpacing,
+          fontSize,
+        },
         style,
       ]}
       {...rest}

@@ -1,11 +1,11 @@
 import { FC } from "react"
 import LoginForm from "../organisms/LoginForm/LoginForm"
-import MainBackground from "../atoms/MainBackground/MainBackground"
 import { Image, StyleSheet, View } from "react-native"
 import Typography from "../atoms/Typography/Typography"
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: "flex-end",
   },
   title: {
@@ -27,11 +27,12 @@ const Login: FC = () => {
   const speechBalloonSvg = require("@/assets/images/speech_balloon.svg")
 
   return (
-    <MainBackground style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.brandContainer}>
         <Typography
           color="white"
-          size="xlheader"
+          fontSize={100}
+          letterSpacing={-5}
           bold
           shadow
           style={styles.title}
@@ -41,7 +42,7 @@ const Login: FC = () => {
         <Image source={speechBalloonSvg} style={styles.img} />
       </View>
       <LoginForm />
-    </MainBackground>
+    </View>
   )
 }
 

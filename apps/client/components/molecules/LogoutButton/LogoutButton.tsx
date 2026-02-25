@@ -1,10 +1,8 @@
 import Avatar from "@/components/atoms/Avatar/Avatar"
 import Container from "@/components/atoms/Container/Container"
 import Typography from "@/components/atoms/Typography/Typography"
-import { Auth } from "@/utils/auth"
-import { Resolve } from "@/utils/types"
-import { useRouter } from "expo-router"
-import { FC } from "react"
+import type { Resolve } from "@/utils/types"
+import type { FC } from "react"
 import {
   GestureResponderEvent,
   ImageProps,
@@ -19,10 +17,10 @@ type Props = {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  button: {
     flexDirection: "row",
   },
-  textContainer: {
+  container: {
     flex: 1,
     backgroundColor: "#000",
     paddingBlock: 0,
@@ -34,12 +32,12 @@ const styles = StyleSheet.create({
 
 const LogoutButton: FC<Resolve<Props>> = ({ source, name, onPress }) => {
   return (
-    <Pressable style={styles.container} onPress={onPress}>
-      <Container variant="form" style={styles.textContainer}>
-        <Typography color="white" size="large" bold>
+    <Pressable style={styles.button} onPress={onPress}>
+      <Container variant="form" style={styles.container}>
+        <Typography color="white" fontSize={25} letterSpacing={-0.8} bold>
           Logout
         </Typography>
-        <Typography color="theme" size="tiny" bold>
+        <Typography color="theme" fontSize={10} letterSpacing={0.5} bold>
           {name.toUpperCase()}
         </Typography>
       </Container>

@@ -1,5 +1,5 @@
-import type { ComponentProps, FC } from "react"
-import { StyleSheet, TextInput } from "react-native"
+import type { FC } from "react"
+import { StyleSheet, TextInput, type TextInputProps } from "react-native"
 
 const styles = StyleSheet.create({
   input: {
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const Input: FC<ComponentProps<typeof TextInput>> = ({ style, ...rest }) => {
+const Input: FC<TextInputProps> = ({ style, ...rest }) => {
   return <TextInput style={[styles.input, style]} {...rest} />
 }
 

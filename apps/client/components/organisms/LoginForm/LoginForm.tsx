@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: "0.25em",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-end",
   },
 })
 
@@ -70,13 +70,17 @@ const LoginForm: FC = () => {
         </Container>
         <Button style={styles.button} onPress={signUp}>
           <Image source={playIcon} />
-          <Typography color="white">Get Started</Typography>
+          <Typography color="white" fontSize={13} bold>
+            Get Started
+          </Typography>
         </Button>
       </Container>
       <View style={styles.text}>
-        <Typography color="white">Not registered?</Typography>
+        <Typography color="white" fontSize={11}>
+          Not registered?
+        </Typography>
         <Link href="/signup">
-          <Typography color="white" underlined>
+          <Typography color="white" fontSize={11} underlined>
             Create Account
           </Typography>
         </Link>
