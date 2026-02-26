@@ -1,15 +1,9 @@
 import Avatar from "@/components/atoms/Avatar/Avatar"
 import Container from "@/components/atoms/Container/Container"
 import Typography from "@/components/atoms/Typography/Typography"
-import { Resolve } from "@/utils/types"
+import { Message } from "@/utils/types"
 import { FC } from "react"
-import { ImageProps, StyleSheet, View } from "react-native"
-
-type Props = {
-  img: ImageProps["source"]
-  name: string
-  timePassed: string
-}
+import { StyleSheet, View } from "react-native"
 
 const styles = StyleSheet.create({
   container: {
@@ -33,14 +27,18 @@ const styles = StyleSheet.create({
   },
 })
 
-const NewMessage: FC<Resolve<Props>> = ({ img, name, timePassed }) => {
+const NewMessage: FC<Omit<Message, "text">> = ({
+  author,
+  authorImage,
+  timePassed,
+}) => {
   return (
     <View style={styles.container}>
-      <Avatar source={img} size="lg" />
+      <Avatar source={authorImage} size="lg" />
       <Container variant="default" style={styles.inlay}>
         <View style={styles.textContainer}>
           <Typography color="dark" bold fontSize={12}>
-            {name}
+            {author}
           </Typography>
           <Typography
             color="theme"

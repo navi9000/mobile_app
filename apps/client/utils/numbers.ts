@@ -13,3 +13,8 @@ export function formatLargeNumber(num: number) {
   }
   return num.toString()
 }
+
+export function newMessageLabelByNumber(length: number) {
+  const isSingular = length % 10 === 1 && length % 100 !== 11
+  return [length, "new", isSingular ? "message" : "messages"].join(" ")
+}
