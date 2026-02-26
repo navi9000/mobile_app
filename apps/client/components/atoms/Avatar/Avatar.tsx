@@ -7,6 +7,9 @@ const styles = StyleSheet.create({
   container: {
     position: "relative",
   },
+  container_shadow: {
+    boxShadow: "0 30px 40px 0 rgba(0, 0, 0, 0.2)",
+  },
   gradient: {
     position: "absolute",
     height: "35%",
@@ -42,11 +45,17 @@ type Props = {
   source: ImageProps["source"]
   size: AvatarSize
   style?: ViewProps["style"]
+  shadow?: boolean
 }
 
-const Avatar: FC<Resolve<Props>> = ({ source, size, style }) => {
+const Avatar: FC<Resolve<Props>> = ({
+  source,
+  size,
+  style,
+  shadow = false,
+}) => {
   return (
-    <View style={[styles.container, style]}>
+    <View style={[styles.container, shadow && styles.container_shadow, style]}>
       <Image
         source={source}
         style={[styles.image, !!size && styles[`image_${size}`]]}
