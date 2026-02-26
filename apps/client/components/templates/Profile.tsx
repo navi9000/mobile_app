@@ -1,9 +1,9 @@
 import { FC } from "react"
 import Container from "../atoms/Container/Container"
-import Avatar from "../atoms/Avatar/Avatar"
 import { ImageSourcePropType, StyleSheet, View } from "react-native"
 import PersonalInfo from "../organisms/PersonalInfo/PersonalInfo"
 import { Resolve } from "@/utils/types"
+import ProfilePicture from "../organisms/ProfilePicture/ProfilePicture"
 
 type Props = {
   firstName: string
@@ -45,7 +45,11 @@ const ProfilePageTemplate: FC<Resolve<Props>> = ({
   return (
     <>
       <Container variant="default" style={styles.container}>
-        <Avatar source={avatar} size="profile" style={styles.avatar} />
+        <ProfilePicture
+          image={avatar}
+          firstName={firstName}
+          lastName={lastName}
+        />
         <PersonalInfo style={styles.contents} {...rest} />
       </Container>
       <View style={styles.background} />
