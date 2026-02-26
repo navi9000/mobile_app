@@ -2,6 +2,8 @@ import { FC } from "react"
 import LoginForm from "../organisms/LoginForm/LoginForm"
 import { Image, StyleSheet, View } from "react-native"
 import Typography from "../atoms/Typography/Typography"
+import { Link } from "expo-router"
+import Container from "../atoms/Container/Container"
 
 const styles = StyleSheet.create({
   container: {
@@ -20,6 +22,18 @@ const styles = StyleSheet.create({
   brandContainer: {
     flex: 1,
     justifyContent: "center",
+  },
+  loginContainer: {
+    backgroundColor: "#000",
+    position: "relative",
+    height: 300,
+    justifyContent: "flex-end",
+  },
+  text: {
+    flexDirection: "row",
+    gap: "0.25em",
+    justifyContent: "center",
+    alignItems: "flex-end",
   },
 })
 
@@ -41,7 +55,19 @@ const Login: FC = () => {
         </Typography>
         <Image source={speechBalloonSvg} style={styles.img} />
       </View>
-      <LoginForm />
+      <Container variant="default" style={styles.loginContainer}>
+        <LoginForm />
+        <View style={styles.text}>
+          <Typography color="white" fontSize={11}>
+            Not registered?
+          </Typography>
+          <Link href="/signup">
+            <Typography color="white" fontSize={11} underlined>
+              Create Account
+            </Typography>
+          </Link>
+        </View>
+      </Container>
     </View>
   )
 }
