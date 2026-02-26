@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const Login: FC = () => {
+const LoginPageTemplate: FC = () => {
   const speechBalloonSvg = require("@/assets/images/speech_balloon.svg")
 
   return (
@@ -72,4 +72,4 @@ const Login: FC = () => {
   )
 }
 
-export default Login
+export default LoginPageTemplate
