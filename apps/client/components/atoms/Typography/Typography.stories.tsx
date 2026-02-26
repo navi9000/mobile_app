@@ -15,3 +15,24 @@ export const Default: Story = {
     children: "Default",
   },
 }
+
+export const Bold: Story = {
+  args: {
+    children: "Bold",
+    bold: true,
+  },
+}
+
+export const Underlined: Story = {
+  args: {
+    children: "Underlined",
+    underlined: true,
+  },
+}
+
+export const Shadow: Story = {
+  args: {
+    children: "Shadow",
+    shadow: true,
+  },
+}

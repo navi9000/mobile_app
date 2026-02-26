@@ -11,7 +11,8 @@
     "storybook-generate": "sb-rn-get-stories",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "vitest"
+    "test": "vitest",
+    "test:coverage": "vitest --coverage"
   },
   "dependencies": {
     "@babel/core": "^7.28.6",
