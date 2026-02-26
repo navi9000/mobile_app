@@ -18,10 +18,18 @@ const HomePage: FC = () => {
       timePassed: "Just now",
     },
   ]
+
+  const recentChats: Message[] = Array.from({ length: 10 }, () => ({
+    authorImage: require("@/assets/images/provided_avatar.png"),
+    author: "Andrea Jameson",
+    text: "I am on my way",
+    timePassed: "Just now",
+  }))
+
   return (
     <View style={styles.container}>
       <HomeMessages messageList={messageList} />
-      <HomeRecentChats />
+      <HomeRecentChats chatList={recentChats} />
     </View>
   )
 }

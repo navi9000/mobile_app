@@ -1,15 +1,12 @@
 import Avatar from "@/components/atoms/Avatar/Avatar"
 import Container from "@/components/atoms/Container/Container"
 import Typography from "@/components/atoms/Typography/Typography"
-import { Resolve } from "@/utils/types"
+import { Message, Resolve } from "@/utils/types"
 import { FC } from "react"
-import { ImageProps, StyleSheet, View } from "react-native"
+import { StyleSheet, View } from "react-native"
 
 type Props = {
-  img: ImageProps["source"]
-  name: string
-  lastMessage: string
-  timePassed: string
+  message: Message
   isLast?: boolean
 }
 
@@ -39,13 +36,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const ChatPreview: FC<Resolve<Props>> = ({
-  img,
-  name,
-  lastMessage,
-  timePassed,
-  isLast = false,
-}) => {
+const ChatPreview: FC<Resolve<Props>> = ({ message, isLast = false }) => {
   return (
     <Container variant="default" style={styles.container}>
       <View
@@ -54,18 +45,18 @@ const ChatPreview: FC<Resolve<Props>> = ({
           !isLast && styles.innerContainer_notlast,
         ]}
       >
-        <Avatar size="xs" source={img} />
+        <Avatar size="xs" source={message.authorImage} />
         <View style={styles.inlay}>
           <View style={styles.topRow}>
             <Typography color="dark" bold fontSize={12}>
-              {name}
+              {message.author}
             </Typography>
             <Typography color="theme" bold fontSize={10}>
-              {timePassed}
+              {message.timePassed}
             </Typography>
           </View>
           <Typography fontSize={13} color="dark10">
-            {lastMessage}
+            {message.text}
           </Typography>
         </View>
       </View>
