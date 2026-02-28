@@ -6,6 +6,7 @@
   "scripts": {
     "test": "cd apps/client && pnpm test",
     "dev:web": "cd apps/client && pnpm web",
+    "dev:server": "cd apps/server && pnpm dev",
     "storybook": "cd apps/client && pnpm storybook"
   },
   "keywords": [],

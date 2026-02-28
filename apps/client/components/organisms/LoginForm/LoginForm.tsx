@@ -4,7 +4,7 @@ import Typography from "@/components/atoms/Typography/Typography"
 import FormInput from "@/components/molecules/FormInput/FormInput"
 import { useRouter } from "expo-router"
 import { FC, useState } from "react"
-import { Image, StyleSheet } from "react-native"
+import { Alert, Image, StyleSheet, Platform } from "react-native"
 import { Auth } from "@/utils/auth"
 
 const styles = StyleSheet.create({
@@ -36,13 +36,40 @@ const LoginForm: FC = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
-  const signUp = () => {
-    if (!username) {
+  const signUp = async () => {
+    if (!username || !password) {
       return
     }
-    Auth.setAuth(username).then(() => {
-      navigate("/")
-    })
+    try {
+      const res = await fetch("http://localhost:3000/auth", {
+        method: "POST",
+        body: JSON.stringify({
+          email: username,
+          password,
+        }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      })
+      if (!res.ok) {
+        const json = await res.json()
+        Platform.OS === "web"
+          ? alert(json.message)
+          : Alert.alert("Error", json.message)
+        return
+      }
+      const json = await res.json()
+      if (json.is_success) {
+        Auth.setAuth(json.body.profile.first_name).then(() => {
+          navigate("/")
+        })
+      }
+    } catch (e) {
+      const message = "Something went wrong"
+      Platform.OS === "web"
+        ? alert(message)
+        : Alert.alert("Error", "Something went wrong")
+    }
   }
 
   return (
