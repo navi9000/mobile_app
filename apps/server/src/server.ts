@@ -1,32 +1,25 @@
 import express, { Request, Response } from "express"
 import cors from "cors"
+import UserAccount from "./models/UserAccount"
+import UserProfile from "./models/UserProfile"
 
 const app = express()
 
 app.use(express.json())
 app.use(cors())
 
-const dummyUserAccount = {
-  email: "test",
-  password: "test",
-}
-
-const dummyUserProfile = {
-  account_id: 0,
-  first_name: "Andrea",
-  last_name: "Johnson",
-  location: "San Francisco",
-  occupation: "Event Manager",
-  user_photo: "assets/images/provided_avatar.png",
-}
-
-app.post("/auth", (req: Request, res: Response) => {
+app.post("/auth", async (req: Request, res: Response) => {
   const { email, password } = req.body
 
-  if (
-    email !== dummyUserAccount.email ||
-    password !== dummyUserAccount.password
-  ) {
+  const userAcc = await UserAccount.findOne({
+    where: {
+      email,
+      password,
+    },
+  })
+  console.log({ userAcc })
+
+  if (!userAcc) {
     res.status(401).json({
       is_success: false,
       message: "Invalid email and/or password",
@@ -34,10 +27,24 @@ app.post("/auth", (req: Request, res: Response) => {
     return
   }
 
+  const userProfile = await UserProfile.findOne({
+    where: {
+      id: userAcc.dataValues.id,
+    },
+  })
+
+  if (!userProfile) {
+    res.status(404).json({
+      is_success: false,
+      message: "Unable to find user profile",
+    })
+    return
+  }
+
   res.json({
     is_success: true,
     body: {
-      profile: dummyUserProfile,
+      profile: userProfile.dataValues,
     },
   })
 })
