@@ -49,4 +49,57 @@ app.post("/auth", async (req: Request, res: Response) => {
   })
 })
 
+app.post("/users", async (req: Request, res: Response) => {
+  try {
+    const { email, password, first_name, last_name } = req.body
+    if (!email || !password || !first_name || !last_name) {
+      throw {
+        name: "SequelizeValidationError",
+      }
+    }
+    const userAccount = await UserAccount.create({
+      email,
+      password,
+    })
+
+    const userProfile = await UserProfile.create({
+      id: userAccount.dataValues.id,
+      first_name,
+      last_name,
+    })
+
+    res.json({
+      is_success: true,
+      data: {
+        profile: userProfile.dataValues,
+      },
+    })
+  } catch (err) {
+    console.error({ err })
+    if (err && typeof err === "object" && "name" in err) {
+      const errorName = err.name
+      if (errorName === "SequelizeValidationError") {
+        res.status(400).json({
+          is_success: false,
+          message:
+            "The following fields may not be empty: email, password, first_name, last_name",
+        })
+        return
+      }
+      if (errorName === "SequelizeUniqueConstraintError") {
+        res.status(409).json({
+          is_success: false,
+          message: "Email already exists",
+        })
+        return
+      }
+    }
+
+    res.status(400).json({
+      is_success: false,
+      message: "Unexpected error",
+    })
+  }
+})
+
 export default app
