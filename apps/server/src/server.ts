@@ -2,6 +2,8 @@ import express, { Request, Response } from "express"
 import cors from "cors"
 import UserAccount from "./models/UserAccount"
 import UserProfile from "./models/UserProfile"
+import { CreateUserSchema, AuthenticateUserSchema } from "./utils/validations"
+import bcrypt from "bcrypt"
 
 const app = express()
 
@@ -9,20 +11,36 @@ app.use(express.json())
 app.use(cors())
 
 app.post("/auth", async (req: Request, res: Response) => {
-  const { email, password } = req.body
+  const validatedFields = AuthenticateUserSchema.safeParse(req.body)
+  if (!validatedFields.success) {
+    res.status(400).json({
+      is_success: false,
+      message: validatedFields.error.issues.flatMap((err) => err.message),
+    })
+    return
+  }
+
+  const { email, password } = validatedFields.data
 
   const userAcc = await UserAccount.findOne({
     where: {
       email,
-      password,
     },
   })
-  console.log({ userAcc })
 
   if (!userAcc) {
     res.status(401).json({
       is_success: false,
-      message: "Invalid email and/or password",
+      message: "Invalid email",
+    })
+    return
+  }
+
+  const hashedPassword = userAcc.dataValues.password
+  if (!(await bcrypt.compare(password, hashedPassword))) {
+    res.status(401).json({
+      is_success: false,
+      message: "Invalid password",
     })
     return
   }
@@ -51,15 +69,20 @@ app.post("/auth", async (req: Request, res: Response) => {
 
 app.post("/users", async (req: Request, res: Response) => {
   try {
-    const { email, password, first_name, last_name } = req.body
-    if (!email || !password || !first_name || !last_name) {
-      throw {
-        name: "SequelizeValidationError",
-      }
+    const validatedFields = CreateUserSchema.safeParse(req.body)
+
+    if (!validatedFields.success) {
+      return res.status(400).json({
+        is_success: false,
+        message: validatedFields.error.issues.flatMap((err) => err.message),
+      })
     }
+
+    const { email, password, first_name, last_name } = validatedFields.data
+
     const userAccount = await UserAccount.create({
       email,
-      password,
+      password: await bcrypt.hash(password, 10),
     })
 
     const userProfile = await UserProfile.create({
