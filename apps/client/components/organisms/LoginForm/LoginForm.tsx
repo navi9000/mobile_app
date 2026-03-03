@@ -60,7 +60,7 @@ const LoginForm: FC = () => {
       }
       const json = await res.json()
       if (json.is_success) {
-        Auth.setAuth(json.body.profile.first_name).then(() => {
+        Auth.setUserProfile(json.body.profile).then(() => {
           navigate("/")
         })
       }

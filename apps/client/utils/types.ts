@@ -8,3 +8,11 @@ export type Message = {
   text: string
   timePassed: string
 }
+
+export interface UserProfile {
+  id: number
+  first_name: string
+  last_name: string
+  location: string | null
+  occupation: string | null
+}

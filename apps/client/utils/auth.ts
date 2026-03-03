@@ -1,27 +1,40 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
-
-export async function isAuth() {
-  const username = await AsyncStorage.getItem("username")
-  return !!username
-}
+import { UserProfile } from "./types"
 
 export class Auth {
-  static #KEY = "username"
-
   static async isAuth() {
-    const username = await AsyncStorage.getItem(this.#KEY)
-    return !!username
+    const id = await AsyncStorage.getItem("id")
+    return !!id
   }
 
   static async clear() {
     await AsyncStorage.clear()
   }
 
-  static async setAuth(username: string) {
-    await AsyncStorage.setItem(this.#KEY, username)
+  static async setUserProfile(userProfile: UserProfile) {
+    await AsyncStorage.multiSet([
+      ["id", userProfile.id.toString()],
+      ["first_name", userProfile.first_name],
+      ["last_name", userProfile.last_name],
+      ["location", userProfile.location ?? ""],
+      ["occupation", userProfile.occupation ?? ""],
+    ])
   }
 
-  static getUsername() {
-    return AsyncStorage.getItem(this.#KEY)
+  static async getUserProfile() {
+    const data = await AsyncStorage.multiGet([
+      "id",
+      "first_name",
+      "last_name",
+      "location",
+      "occupation",
+    ])
+    return {
+      id: Number(data[0][1]),
+      first_name: data[1][1]!,
+      last_name: data[2][1]!,
+      location: data[3][1] ?? null,
+      occupation: data[4][1] ?? null,
+    }
   }
 }

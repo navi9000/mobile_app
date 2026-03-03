@@ -1,5 +1,6 @@
 import Header from "@/components/molecules/Header/Header"
 import { Auth } from "@/utils/auth"
+import { UserProfile } from "@/utils/types"
 import { Stack, usePathname, useRouter } from "expo-router"
 import { FC, useEffect, useState } from "react"
 import { ActivityIndicator, View } from "react-native"
@@ -9,8 +10,8 @@ const PrivateLayout: FC = () => {
   const crossIcon = require("@/assets/images/cross.svg")
   const [isLoaded, setIsLoaded] = useState(false)
   const { navigate, back, push } = useRouter()
-  const [username, setUsername] = useState<string | null>(null)
   const pathname = usePathname()
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
 
   useEffect(() => {
     ;(async function () {
@@ -18,7 +19,7 @@ const PrivateLayout: FC = () => {
       if (!isAuth) {
         navigate("/signin")
       } else {
-        setUsername(await Auth.getUsername())
+        setUserProfile(await Auth.getUserProfile())
         setIsLoaded(true)
       }
     })()
@@ -42,7 +43,7 @@ const PrivateLayout: FC = () => {
     push({
       pathname: "/navigationmodal",
       params: {
-        username,
+        username: userProfile?.first_name,
         prevPathname: pathname,
         activePathname: pathname,
       },
@@ -56,7 +57,7 @@ const PrivateLayout: FC = () => {
         options={{
           header: () => (
             <Header
-              title={`Hi, ${username}`}
+              title={`Hi, ${userProfile?.first_name}`}
               leftIcon={{
                 source: burgerIcon,
                 onPress: openModal,
