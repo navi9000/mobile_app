@@ -1,16 +1,11 @@
 import { FC } from "react"
 import Container from "../atoms/Container/Container"
-import { ImageSourcePropType, StyleSheet, View } from "react-native"
+import { StyleSheet, View } from "react-native"
 import PersonalInfo from "../organisms/PersonalInfo/PersonalInfo"
 import { Resolve } from "@/utils/types"
 import ProfilePicture from "../organisms/ProfilePicture/ProfilePicture"
 
 type Props = {
-  firstName: string
-  lastName: string
-  avatar: ImageSourcePropType
-  location: string
-  occupation: string
   followers: number
   following: number
   likes: number
@@ -36,21 +31,12 @@ const styles = StyleSheet.create({
   },
 })
 
-const ProfilePageTemplate: FC<Resolve<Props>> = ({
-  firstName,
-  lastName,
-  avatar,
-  ...rest
-}) => {
+const ProfilePageTemplate: FC<Resolve<Props>> = (props) => {
   return (
     <>
       <Container variant="default" style={styles.container}>
-        <ProfilePicture
-          image={avatar}
-          firstName={firstName}
-          lastName={lastName}
-        />
-        <PersonalInfo style={styles.contents} {...rest} />
+        <ProfilePicture />
+        <PersonalInfo style={styles.contents} {...props} />
       </Container>
       <View style={styles.background} />
     </>

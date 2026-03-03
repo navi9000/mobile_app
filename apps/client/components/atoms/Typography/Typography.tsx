@@ -5,7 +5,7 @@ import { StyleSheet, Text } from "react-native"
 type Color = "white" | "dark" | "dark10" | "theme" | "theme10"
 
 interface CommonProps {
-  children: string
+  children: string | null
   color?: Color
   bold?: boolean
   shadow?: boolean

@@ -2,13 +2,12 @@ import Container from "@/components/atoms/Container/Container"
 import Divider from "@/components/atoms/Divider/Divider"
 import Typography from "@/components/atoms/Typography/Typography"
 import ProfileCounter from "@/components/molecules/ProfileCounter/ProfileCounter"
+import useUserProfile from "@/features/userProfile/useUserProfile"
 import { Resolve } from "@/utils/types"
 import { FC } from "react"
 import { StyleSheet, View, type ViewProps } from "react-native"
 
 type Props = {
-  location: string
-  occupation: string
   followers: number
   following: number
   likes: number
@@ -27,13 +26,12 @@ const styles = StyleSheet.create({
 })
 
 const PersonalInfo: FC<Resolve<Props>> = ({
-  location,
-  occupation,
   followers,
   following,
   likes,
   style,
 }) => {
+  const { location, occupation } = useUserProfile()
   return (
     <Container style={[styles.container, style]} variant="default">
       <View>

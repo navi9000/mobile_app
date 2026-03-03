@@ -1,4 +1,6 @@
 import Header from "@/components/molecules/Header/Header"
+import UserProfileProvider from "@/features/userProfile/UserProfileProvider"
+import useUserProfile from "@/features/userProfile/useUserProfile"
 import { Auth } from "@/utils/auth"
 import { UserProfile } from "@/utils/types"
 import { Stack, usePathname, useRouter } from "expo-router"
@@ -25,7 +27,7 @@ const PrivateLayout: FC = () => {
     })()
   }, [])
 
-  if (!isLoaded) {
+  if (!isLoaded || !userProfile) {
     return (
       <View
         style={{
@@ -43,7 +45,6 @@ const PrivateLayout: FC = () => {
     push({
       pathname: "/navigationmodal",
       params: {
-        username: userProfile?.first_name,
         prevPathname: pathname,
         activePathname: pathname,
       },
@@ -51,49 +52,56 @@ const PrivateLayout: FC = () => {
   }
 
   return (
-    <Stack screenOptions={{ contentStyle: { backgroundColor: "transparent" } }}>
-      <Stack.Screen
-        name="index"
-        options={{
-          header: () => (
-            <Header
-              title={`Hi, ${userProfile?.first_name}`}
-              leftIcon={{
-                source: burgerIcon,
-                onPress: openModal,
-              }}
-            />
-          ),
-        }}
-      />
-      <Stack.Screen
-        name="profile"
-        options={{
-          header: () => (
-            <Header
-              title="Profile"
-              leftIcon={{
-                source: burgerIcon,
-                onPress: openModal,
-              }}
-            />
-          ),
-        }}
-      />
-      <Stack.Screen
-        name="navigationmodal"
-        options={{
-          presentation: "modal",
-          header: () => (
-            <Header
-              title=""
-              leftIcon={{ source: crossIcon, onPress: back }}
-              transparent
-            />
-          ),
-        }}
-      />
-    </Stack>
+    <UserProfileProvider userProfile={userProfile}>
+      <Stack
+        screenOptions={{ contentStyle: { backgroundColor: "transparent" } }}
+      >
+        <Stack.Screen
+          name="index"
+          options={{
+            header: () => {
+              const { first_name } = useUserProfile()
+              return (
+                <Header
+                  title={`Hi, ${first_name}`}
+                  leftIcon={{
+                    source: burgerIcon,
+                    onPress: openModal,
+                  }}
+                />
+              )
+            },
+          }}
+        />
+        <Stack.Screen
+          name="profile"
+          options={{
+            header: () => (
+              <Header
+                title="Profile"
+                leftIcon={{
+                  source: burgerIcon,
+                  onPress: openModal,
+                }}
+              />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="navigationmodal"
+          options={{
+            presentation: "modal",
+            header: () => (
+              <Header
+                title=""
+                leftIcon={{ source: crossIcon, onPress: back }}
+                transparent
+              />
+            ),
+          }}
+        />
+      </Stack>
+    </UserProfileProvider>
   )
 }
 

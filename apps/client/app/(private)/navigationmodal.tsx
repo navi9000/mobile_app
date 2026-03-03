@@ -1,7 +1,8 @@
 import LogoutButton from "@/components/molecules/LogoutButton/LogoutButton"
 import NavItem from "@/components/molecules/NavItem/NavItem"
+import useUserProfile from "@/features/userProfile/useUserProfile"
 import { Auth } from "@/utils/auth"
-import { LinkProps, useLocalSearchParams, useRouter } from "expo-router"
+import { LinkProps, useRouter } from "expo-router"
 import { FC } from "react"
 import { ImageProps, StyleSheet, View } from "react-native"
 
@@ -42,7 +43,7 @@ const navigationItems: NavigationItem[] = [
 
 const NavigationModal: FC<Props> = () => {
   const { navigate } = useRouter()
-  const { username } = useLocalSearchParams()
+  const { first_name, last_name } = useUserProfile()
 
   const logout = async () => {
     await Auth.clear()
@@ -50,7 +51,6 @@ const NavigationModal: FC<Props> = () => {
   }
 
   const source = require("@/assets/images/provided_avatar.png")
-  const name = typeof username === "string" ? username : username[0]
 
   return (
     <View style={styles.container}>
@@ -59,7 +59,11 @@ const NavigationModal: FC<Props> = () => {
           <NavItem key={index} index={index} {...item} />
         ))}
       </View>
-      <LogoutButton source={source} name={name} onPress={logout} />
+      <LogoutButton
+        source={source}
+        name={`${first_name} ${last_name}`}
+        onPress={logout}
+      />
     </View>
   )
 }

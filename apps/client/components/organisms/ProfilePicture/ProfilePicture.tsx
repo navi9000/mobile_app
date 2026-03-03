@@ -1,21 +1,13 @@
 import Avatar from "@/components/atoms/Avatar/Avatar"
 import Container from "@/components/atoms/Container/Container"
 import Typography from "@/components/atoms/Typography/Typography"
+import useUserProfile from "@/features/userProfile/useUserProfile"
 import { Resolve } from "@/utils/types"
 import { LinearGradient } from "expo-linear-gradient"
 import { FC } from "react"
-import {
-  ImageSourcePropType,
-  StyleProp,
-  StyleSheet,
-  View,
-  ViewStyle,
-} from "react-native"
+import { StyleProp, StyleSheet, View, ViewStyle } from "react-native"
 
 type Props = {
-  image: ImageSourcePropType
-  firstName: string
-  lastName: string
   style?: StyleProp<ViewStyle>
 }
 
@@ -41,15 +33,13 @@ const styles = StyleSheet.create({
   },
 })
 
-const ProfilePicture: FC<Resolve<Props>> = ({
-  image,
-  firstName,
-  lastName,
-  style,
-}) => {
+const ProfilePicture: FC<Resolve<Props>> = ({ style }) => {
+  const { first_name, last_name } = useUserProfile()
+  const avatar = require("@/assets/images/provided_avatar.png")
+
   return (
     <View style={[styles.container, style]}>
-      <Avatar size="full" source={image} />
+      <Avatar size="full" source={avatar} />
       <LinearGradient
         style={styles.gradient}
         colors={["#000", "rgba(0,0,0,0)"]}
@@ -64,7 +54,7 @@ const ProfilePicture: FC<Resolve<Props>> = ({
           bold
           shadow
         >
-          {firstName}
+          {first_name}
         </Typography>
         <Typography
           fontSize={35}
@@ -73,7 +63,7 @@ const ProfilePicture: FC<Resolve<Props>> = ({
           bold
           shadow
         >
-          {lastName}
+          {last_name}
         </Typography>
       </Container>
     </View>

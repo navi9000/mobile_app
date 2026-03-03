@@ -18,6 +18,7 @@ export class Auth {
       ["last_name", userProfile.last_name],
       ["location", userProfile.location ?? ""],
       ["occupation", userProfile.occupation ?? ""],
+      ["user_photo", userProfile.user_photo ?? ""],
     ])
   }
 
@@ -28,6 +29,7 @@ export class Auth {
       "last_name",
       "location",
       "occupation",
+      "user_photo",
     ])
     return {
       id: Number(data[0][1]),
@@ -35,6 +37,7 @@ export class Auth {
       last_name: data[2][1]!,
       location: data[3][1] ?? null,
       occupation: data[4][1] ?? null,
+      user_photo: data[5][1] ?? null,
     }
   }
 }

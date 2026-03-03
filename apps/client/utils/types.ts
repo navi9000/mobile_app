@@ -15,4 +15,5 @@ export interface UserProfile {
   last_name: string
   location: string | null
   occupation: string | null
+  user_photo: string | null
 }
