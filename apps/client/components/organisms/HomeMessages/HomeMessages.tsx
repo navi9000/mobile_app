@@ -1,30 +1,44 @@
 import Container from "@/components/atoms/Container/Container"
+import Typography from "@/components/atoms/Typography/Typography"
 import LabelWithIcon from "@/components/molecules/LabelWithIcon/LabelWithIcon"
 import NewMessage from "@/components/molecules/NewMessage/NewMessage"
+import { newMessageLabelByNumber } from "@/utils/numbers"
+import { Message, Resolve } from "@/utils/types"
 import { FC } from "react"
 import { StyleSheet } from "react-native"
+
+type Props = {
+  messageList: Omit<Message, "text">[]
+}
 
 const styles = StyleSheet.create({
   container: {
     gap: 20,
     alignItems: "center",
+    height: 199,
   },
 })
 
-const HomeMessages: FC = () => {
-  // label
-  const bellIcon = require("@/assets/images/bell.svg")
-  const label = "1 new message"
+const HomeMessages: FC<Resolve<Props>> = ({ messageList }) => {
+  const lastMessage = messageList.reverse()[0]
 
-  // new message
-  const avatarIcon = require("@/assets/images/provided_avatar.png")
-  const name = "John Doe"
-  const timePassed = "Just now"
+  if (!lastMessage) {
+    return (
+      <Container variant="default" style={styles.container}>
+        <Typography color="white" letterSpacing={0.5}>
+          No new messages
+        </Typography>
+      </Container>
+    )
+  }
 
   return (
     <Container variant="default" style={styles.container}>
-      <LabelWithIcon iconSource={bellIcon} text={label} />
-      <NewMessage img={avatarIcon} name={name} timePassed={timePassed} />
+      <LabelWithIcon
+        iconSource={require("@/assets/images/bell.svg")}
+        text={newMessageLabelByNumber(messageList.length)}
+      />
+      <NewMessage {...lastMessage} />
     </Container>
   )
 }

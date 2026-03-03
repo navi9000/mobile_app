@@ -1,8 +1,15 @@
 import { FC } from "react"
 import Container from "../atoms/Container/Container"
-import Avatar from "../atoms/Avatar/Avatar"
 import { StyleSheet, View } from "react-native"
 import PersonalInfo from "../organisms/PersonalInfo/PersonalInfo"
+import { Resolve } from "@/utils/types"
+import ProfilePicture from "../organisms/ProfilePicture/ProfilePicture"
+
+type Props = {
+  followers: number
+  following: number
+  likes: number
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -24,27 +31,16 @@ const styles = StyleSheet.create({
   },
 })
 
-const ProfilePage: FC = () => {
-  const personalInfo = {
-    location: "San Francisco",
-    occupation: "Event Manager",
-    followers: 145234,
-    following: 56304,
-    likes: 1690,
-  }
+const ProfilePageTemplate: FC<Resolve<Props>> = (props) => {
   return (
     <>
       <Container variant="default" style={styles.container}>
-        <Avatar
-          source={require("@/assets/images/provided_avatar.png")}
-          size="profile"
-          style={styles.avatar}
-        />
-        <PersonalInfo style={styles.contents} {...personalInfo} />
+        <ProfilePicture />
+        <PersonalInfo style={styles.contents} {...props} />
       </Container>
       <View style={styles.background} />
     </>
   )
 }
 
-export default ProfilePage
+export default ProfilePageTemplate

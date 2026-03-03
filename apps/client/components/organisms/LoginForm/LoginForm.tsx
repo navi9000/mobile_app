@@ -2,18 +2,12 @@ import Button from "@/components/atoms/Button/Button"
 import Container from "@/components/atoms/Container/Container"
 import Typography from "@/components/atoms/Typography/Typography"
 import FormInput from "@/components/molecules/FormInput/FormInput"
-import { Link, useRouter } from "expo-router"
+import { useRouter } from "expo-router"
 import { FC, useState } from "react"
-import { Image, StyleSheet, View } from "react-native"
+import { Alert, Image, StyleSheet, Platform } from "react-native"
 import { Auth } from "@/utils/auth"
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#000",
-    position: "relative",
-    height: 300,
-    justifyContent: "flex-end",
-  },
   formContainer: {
     position: "absolute",
     bottom: 48,
@@ -34,12 +28,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
   },
-  text: {
-    flexDirection: "row",
-    gap: "0.25em",
-    justifyContent: "center",
-    alignItems: "flex-end",
-  },
 })
 
 const LoginForm: FC = () => {
@@ -48,43 +36,58 @@ const LoginForm: FC = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
-  const signUp = () => {
-    if (!username) {
+  const signUp = async () => {
+    if (!username || !password) {
       return
     }
-    Auth.setAuth(username).then(() => {
-      navigate("/")
-    })
+    try {
+      const res = await fetch("http://localhost:3000/auth", {
+        method: "POST",
+        body: JSON.stringify({
+          email: username,
+          password,
+        }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      })
+      if (!res.ok) {
+        const json = await res.json()
+        Platform.OS === "web"
+          ? alert(json.message)
+          : Alert.alert("Error", json.message)
+        return
+      }
+      const json = await res.json()
+      if (json.is_success) {
+        Auth.setUserProfile(json.body.profile).then(() => {
+          navigate("/")
+        })
+      }
+    } catch (e) {
+      const message = "Something went wrong"
+      Platform.OS === "web"
+        ? alert(message)
+        : Alert.alert("Error", "Something went wrong")
+    }
   }
 
   return (
-    <Container variant="default" style={styles.container}>
-      <Container variant="default" style={styles.formContainer}>
-        <Container variant="form" style={styles.form}>
-          <FormInput title="Username" onChangeText={setUsername} />
-          <FormInput
-            title="Password"
-            secureTextEntry
-            onChangeText={setPassword}
-          />
-        </Container>
-        <Button style={styles.button} onPress={signUp}>
-          <Image source={playIcon} />
-          <Typography color="white" fontSize={13} bold>
-            Get Started
-          </Typography>
-        </Button>
+    <Container variant="default" style={styles.formContainer}>
+      <Container variant="form" style={styles.form}>
+        <FormInput title="Username" onChangeText={setUsername} />
+        <FormInput
+          title="Password"
+          secureTextEntry
+          onChangeText={setPassword}
+        />
       </Container>
-      <View style={styles.text}>
-        <Typography color="white" fontSize={11}>
-          Not registered?
+      <Button style={styles.button} onPress={signUp}>
+        <Image source={playIcon} />
+        <Typography color="white" fontSize={13} bold>
+          Get Started
         </Typography>
-        <Link href="/signup">
-          <Typography color="white" fontSize={11} underlined>
-            Create Account
-          </Typography>
-        </Link>
-      </View>
+      </Button>
     </Container>
   )
 }

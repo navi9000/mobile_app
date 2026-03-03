@@ -3,6 +3,11 @@ import Typography from "@/components/atoms/Typography/Typography"
 import { FC } from "react"
 import { StyleSheet, FlatList } from "react-native"
 import ChatPreview from "@/components/molecules/ChatPreview/ChatPreview"
+import { Message, Resolve } from "@/utils/types"
+
+type Props = {
+  chatList: Message[]
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -13,23 +18,16 @@ const styles = StyleSheet.create({
   },
 })
 
-const TEMP_DATA = Array.from({ length: 10 }, () => ({
-  img: require("@/assets/images/provided_avatar.png"),
-  name: "Andrea Jameson",
-  lastMessage: "I am on my way",
-  timePassed: "Just now",
-}))
-
-const HomeRecentChats: FC = () => {
+const HomeRecentChats: FC<Resolve<Props>> = ({ chatList }) => {
   return (
     <Container variant="default" style={styles.container}>
       <Typography color="white" fontSize={10} letterSpacing={1} bold>
         {"Recent chats".toUpperCase()}
       </Typography>
       <FlatList
-        data={TEMP_DATA}
+        data={chatList}
         renderItem={({ item, index }) => (
-          <ChatPreview {...item} isLast={index === 9} />
+          <ChatPreview message={item} isLast={index === 9} />
         )}
       />
     </Container>
