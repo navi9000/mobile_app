@@ -30,7 +30,7 @@ router.post("/sign-up", async (req, res) => {
       last_name,
     })
 
-    res.json({
+    res.status(201).json({
       is_success: true,
       data: {
         profile: userProfile.dataValues,
