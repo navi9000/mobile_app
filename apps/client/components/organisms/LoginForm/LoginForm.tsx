@@ -41,7 +41,7 @@ const LoginForm: FC = () => {
       return
     }
     try {
-      const res = await fetch("http://localhost:3000/auth", {
+      const res = await fetch("http://localhost:3000/auth/sign-in", {
         method: "POST",
         body: JSON.stringify({
           email: username,
