@@ -121,4 +121,11 @@ router.post("/sign-in", async (req, res) => {
   })
 })
 
+router.get("/list", async (req, res) => {
+  const accounts = await UserAccount.findAll()
+  res.json({
+    accounts: accounts,
+  })
+})
+
 export default router

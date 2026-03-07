@@ -14,7 +14,6 @@ ChatParticipant.init(
     },
     user_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       references: {
         model: UserAccount,
         key: "id",
@@ -22,7 +21,6 @@ ChatParticipant.init(
     },
     chat_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       references: {
         model: Chat,
         key: "id",
