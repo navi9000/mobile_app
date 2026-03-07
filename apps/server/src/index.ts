@@ -1,5 +1,6 @@
 import app from "./server"
 import sequelize from "./config/db.config"
+import ChatMessage from "./models/ChatMessage"
 
 const PORT_NUMBER = 3000
 
@@ -13,6 +14,7 @@ async function run() {
       alter: false,
       logging: false,
     })
+
     console.log("Models synchronized")
 
     app.listen(PORT_NUMBER, () => {

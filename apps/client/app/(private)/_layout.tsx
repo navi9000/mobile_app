@@ -10,6 +10,8 @@ import { ActivityIndicator, View } from "react-native"
 const PrivateLayout: FC = () => {
   const burgerIcon = require("@/assets/images/burger.svg")
   const crossIcon = require("@/assets/images/cross.svg")
+  const hexagonIcon = require("@/assets/images/hexagon.svg")
+  const turnOffIcon = require("@/assets/images/turn_off.svg")
   const [isLoaded, setIsLoaded] = useState(false)
   const { navigate, back, push } = useRouter()
   const pathname = usePathname()
@@ -45,8 +47,16 @@ const PrivateLayout: FC = () => {
     push({
       pathname: "/navigationmodal",
       params: {
-        prevPathname: pathname,
         activePathname: pathname,
+      },
+    })
+  }
+
+  const openSettings = () => {
+    push({
+      pathname: "/settings",
+      params: {
+        prevPathname: pathname,
       },
     })
   }
@@ -95,7 +105,20 @@ const PrivateLayout: FC = () => {
               <Header
                 title=""
                 leftIcon={{ source: crossIcon, onPress: back }}
+                rightIcon={{ source: hexagonIcon, onPress: openSettings }}
                 transparent
+              />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="settings"
+          options={{
+            header: () => (
+              <Header
+                title="Settings"
+                leftIcon={{ source: burgerIcon, onPress: openModal }}
+                rightIcon={{ source: turnOffIcon, onPress: back }}
               />
             ),
           }}
