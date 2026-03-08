@@ -2,9 +2,51 @@ import { Router } from "express"
 import Chat from "../models/Chat"
 import ChatParticipant from "../models/ChatParticipant"
 import ChatMessage from "../models/ChatMessage"
-import { ForeignKeyConstraintError, ValidationError } from "sequelize"
+import { ForeignKeyConstraintError, ValidationError, Op } from "sequelize"
 
 const router = Router()
+
+// router.get("/", async (req, res) => {
+//   const { user_id } = req.body
+
+//   console.log({ user_id })
+//   try {
+//     const chatList = await ChatParticipant.findAll({
+//       where: {
+//         user_id: +user_id,
+//       },
+//       limit: 10,
+//     })
+
+//     const chatIds = chatList.map((chat) => chat.dataValues.chat_id)
+
+//     const messages = await ChatMessage.findAll({
+//       where: {
+//         chat_id: chatIds,
+//       },
+//     })
+
+//     console.log({
+//       messages,
+//     })
+
+//     res.json({
+//       is_success: true,
+//       data: {
+//         chats: "ok",
+//       },
+//     })
+//   } catch (err) {
+//     let status = 400
+//     let message = "Unknown error"
+//     console.log({ err })
+
+//     res.status(status).json({
+//       is_success: false,
+//       message,
+//     })
+//   }
+// })
 
 router.post("/", async (req, res) => {
   const { user_id } = req.body
