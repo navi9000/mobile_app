@@ -1,37 +1,36 @@
-import { Model, DataTypes } from "sequelize"
-import sequelize from "../config/db.config"
-import UserAccount from "./UserAccount"
-import Chat from "./Chat"
+import { Model, DataTypes, Sequelize } from "sequelize"
 
-class ChatMessage extends Model {}
+export default (sequelize: Sequelize, { Chat, UserAccount }: any) => {
+  class ChatMessage extends Model {}
 
-ChatMessage.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    user_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: UserAccount,
-        key: "id",
+  ChatMessage.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      user_id: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: UserAccount,
+          key: "id",
+        },
+      },
+      chat_id: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: Chat,
+          key: "id",
+        },
+      },
+      value: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
     },
-    chat_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: Chat,
-        key: "id",
-      },
-    },
-    value: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  },
-  { sequelize, modelName: "chat_message" },
-)
+    { sequelize, modelName: "chat_message" },
+  )
 
-export default ChatMessage
+  return ChatMessage
+}

@@ -1,17 +1,18 @@
-import { Model, DataTypes } from "sequelize"
-import sequelize from "../config/db.config"
+import { Model, DataTypes, Sequelize } from "sequelize"
 
-class Chat extends Model {}
+export default (sequelize: Sequelize) => {
+  class Chat extends Model {}
 
-Chat.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
+  Chat.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
     },
-  },
-  { sequelize, modelName: "chat" },
-)
+    { sequelize, modelName: "chat" },
+  )
 
-export default Chat
+  return Chat
+}

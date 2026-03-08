@@ -1,8 +1,8 @@
 import { Router } from "express"
-import Chat from "../models/Chat"
-import ChatParticipant from "../models/ChatParticipant"
-import ChatMessage from "../models/ChatMessage"
-import { ForeignKeyConstraintError, ValidationError, Op } from "sequelize"
+import { models } from "../config/db.config"
+import { ForeignKeyConstraintError, ValidationError } from "sequelize"
+
+const { Chat, ChatParticipant, ChatMessage } = models
 
 const router = Router()
 

@@ -1,38 +1,40 @@
-import { Model, DataTypes } from "sequelize"
-import sequelize from "../config/db.config"
+import { Model, DataTypes, Sequelize } from "sequelize"
+import { sequelize } from "../config/db.config"
 import UserAccount from "./UserAccount"
 
-class UserProfile extends Model {}
+export default (sequelize: Sequelize, { UserAccount }: any) => {
+  class UserProfile extends Model {}
 
-UserProfile.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      references: {
-        model: UserAccount,
-        key: "id",
+  UserProfile.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        references: {
+          model: UserAccount,
+          key: "id",
+        },
+      },
+      first_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      last_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      location: {
+        type: DataTypes.STRING,
+      },
+      occupation: {
+        type: DataTypes.STRING,
+      },
+      user_photo: {
+        type: DataTypes.STRING,
       },
     },
-    first_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    last_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    location: {
-      type: DataTypes.STRING,
-    },
-    occupation: {
-      type: DataTypes.STRING,
-    },
-    user_photo: {
-      type: DataTypes.STRING,
-    },
-  },
-  { sequelize, modelName: "user_profile" },
-)
+    { sequelize, modelName: "user_profile" },
+  )
 
-export default UserProfile
+  return UserProfile
+}

@@ -1,8 +1,9 @@
 import { Router } from "express"
 import { AuthenticateUserSchema, CreateUserSchema } from "../utils/validations"
-import UserAccount from "../models/UserAccount"
-import UserProfile from "../models/UserProfile"
 import bcrypt from "bcrypt"
+import { models } from "../config/db.config"
+
+const { UserAccount, UserProfile } = models
 
 const router = Router()
 

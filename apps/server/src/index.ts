@@ -1,6 +1,5 @@
 import app from "./server"
-import sequelize from "./config/db.config"
-import ChatMessage from "./models/ChatMessage"
+import { sequelize } from "./config/db.config"
 
 const PORT_NUMBER = 3000
 
