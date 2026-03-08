@@ -1,3 +1,4 @@
+import { LinkProps } from "expo-router"
 import { ImageSourcePropType } from "react-native"
 
 export type Resolve<T> = T extends Function ? T : { [K in keyof T]: T[K] }
@@ -16,4 +17,9 @@ export interface UserProfile {
   location: string | null
   occupation: string | null
   user_photo: string | null
+}
+
+export type NavigationItem = {
+  title: string
+  href: LinkProps["href"]
 }

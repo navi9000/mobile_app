@@ -1,33 +1,16 @@
-import LogoutButton from "@/components/molecules/LogoutButton/LogoutButton"
-import NavItem from "@/components/molecules/NavItem/NavItem"
+import NavigationTemplate from "@/components/templates/Navigation"
 import useUserProfile from "@/features/userProfile/useUserProfile"
 import { Auth } from "@/utils/auth"
-import { LinkProps, useRouter } from "expo-router"
-import { FC } from "react"
-import { ImageProps, StyleSheet, View } from "react-native"
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  list: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 36,
-  },
-})
+import { NavigationItem } from "@/utils/types"
+import { useRouter } from "expo-router"
+import type { FC } from "react"
+import type { ImageSourcePropType } from "react-native"
 
 type Props = {
-  source: ImageProps["source"]
+  source: ImageSourcePropType
   name: string
   visible: boolean
   close: () => void
-}
-
-type NavigationItem = {
-  title: string
-  href: LinkProps["href"]
 }
 
 const navigationItems: NavigationItem[] = [
@@ -53,18 +36,11 @@ const NavigationModal: FC<Props> = () => {
   const source = require("@/assets/images/provided_avatar.png")
 
   return (
-    <View style={styles.container}>
-      <View style={styles.list}>
-        {navigationItems.map((item, index) => (
-          <NavItem key={index} index={index} {...item} />
-        ))}
-      </View>
-      <LogoutButton
-        source={source}
-        name={`${first_name} ${last_name}`}
-        onPress={logout}
-      />
-    </View>
+    <NavigationTemplate
+      navigationItems={navigationItems}
+      user={{ avatar: source, fullName: `${first_name} ${last_name}` }}
+      logout={logout}
+    />
   )
 }
 
