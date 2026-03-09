@@ -29,6 +29,8 @@ router.post("/sign-up", async (req, res) => {
       id: userAccount.dataValues.id,
       first_name,
       last_name,
+      user_photo:
+        "https://res.cloudinary.com/da6rqo2u6/image/upload/v1773066497/users/shoes_v2.png",
     })
 
     res.status(201).json({

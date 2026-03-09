@@ -5,17 +5,13 @@ import loadChatMessage from "../models/ChatMessage"
 import loadChatParticipant from "../models/ChatParticipant"
 import loadUserAccount from "../models/UserAccount"
 import loadUserProfile from "../models/UserProfile"
+import { DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER } from "./env"
 
-const sequelize = new Sequelize(
-  env("DB_NAME"),
-  env("DB_USER"),
-  env("DB_PASS"),
-  {
-    host: env("DB_HOST"),
-    port: +env("DB_PORT"),
-    dialect: "postgres",
-  },
-)
+const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
+  host: DB_HOST,
+  port: DB_PORT,
+  dialect: "postgres",
+})
 
 // models
 const UserAccount = loadUserAccount(sequelize)
