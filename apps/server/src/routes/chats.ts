@@ -6,47 +6,48 @@ const { Chat, ChatParticipant, ChatMessage } = models
 
 const router = Router()
 
-// router.get("/", async (req, res) => {
-//   const { user_id } = req.body
+router.get("/", async (req, res) => {
+  const { user_id } = req.body
 
-//   console.log({ user_id })
-//   try {
-//     const chatList = await ChatParticipant.findAll({
-//       where: {
-//         user_id: +user_id,
-//       },
-//       limit: 10,
-//     })
+  console.log({ user_id })
+  try {
+    const chatList = await Chat.findAll({
+      attributes: ["id"],
+      include: [
+        {
+          model: ChatParticipant,
+          attributes: [],
+          limit: 0,
+          where: {
+            user_id,
+          },
+        },
+        {
+          model: ChatMessage,
+          attributes: ["id", "user_id", "value", "createdAt"],
+          limit: 1,
+          order: [["createdAt", "DESC"]],
+        },
+      ],
+    })
 
-//     const chatIds = chatList.map((chat) => chat.dataValues.chat_id)
+    res.json({
+      is_success: true,
+      data: {
+        chats: chatList.map((chat) => chat.dataValues),
+      },
+    })
+  } catch (err) {
+    let status = 400
+    let message = "Unknown error"
+    console.log({ err })
 
-//     const messages = await ChatMessage.findAll({
-//       where: {
-//         chat_id: chatIds,
-//       },
-//     })
-
-//     console.log({
-//       messages,
-//     })
-
-//     res.json({
-//       is_success: true,
-//       data: {
-//         chats: "ok",
-//       },
-//     })
-//   } catch (err) {
-//     let status = 400
-//     let message = "Unknown error"
-//     console.log({ err })
-
-//     res.status(status).json({
-//       is_success: false,
-//       message,
-//     })
-//   }
-// })
+    res.status(status).json({
+      is_success: false,
+      message,
+    })
+  }
+})
 
 router.post("/", async (req, res) => {
   const { user_id } = req.body

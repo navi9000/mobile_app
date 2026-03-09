@@ -1,6 +1,6 @@
 import { Model, DataTypes, Sequelize } from "sequelize"
 
-export default (sequelize: Sequelize, { UserAccount }: any) => {
+export default (sequelize: Sequelize) => {
   class UserProfile extends Model {}
 
   UserProfile.init(
@@ -8,10 +8,6 @@ export default (sequelize: Sequelize, { UserAccount }: any) => {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        // references: {
-        //   model: UserAccount,
-        //   key: "id",
-        // },
       },
       first_name: {
         type: DataTypes.STRING,

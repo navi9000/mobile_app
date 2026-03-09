@@ -15,13 +15,18 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
 
 // models
 const UserAccount = loadUserAccount(sequelize)
-const UserProfile = loadUserProfile(sequelize, { UserAccount })
+const UserProfile = loadUserProfile(sequelize)
 const Chat = loadChat(sequelize)
 const ChatParticipant = loadChatParticipant(sequelize, { Chat, UserAccount })
 const ChatMessage = loadChatMessage(sequelize, { Chat, UserAccount })
 
 UserAccount.hasOne(UserProfile, { foreignKey: "id" })
 UserProfile.belongsTo(UserAccount, { foreignKey: "id" })
+
+Chat.hasMany(ChatParticipant, { foreignKey: "chat_id" })
+ChatParticipant.belongsTo(Chat, { foreignKey: "id" })
+Chat.hasMany(ChatMessage, { foreignKey: "chat_id" })
+ChatMessage.belongsTo(Chat, { foreignKey: "id" })
 
 const models = { UserAccount, UserProfile, Chat, ChatParticipant, ChatMessage }
 
