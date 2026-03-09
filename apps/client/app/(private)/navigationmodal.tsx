@@ -26,19 +26,17 @@ const navigationItems: NavigationItem[] = [
 
 const NavigationModal: FC<Props> = () => {
   const { navigate } = useRouter()
-  const { first_name, last_name } = useUserProfile()
+  const { first_name, last_name, user_photo } = useUserProfile()
 
   const logout = async () => {
     await Auth.clear()
     navigate("/signin")
   }
 
-  const source = require("@/assets/images/provided_avatar.png")
-
   return (
     <NavigationTemplate
       navigationItems={navigationItems}
-      user={{ avatar: source, fullName: `${first_name} ${last_name}` }}
+      user={{ avatar: user_photo!, fullName: `${first_name} ${last_name}` }}
       logout={logout}
     />
   )

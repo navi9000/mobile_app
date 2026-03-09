@@ -45,8 +45,7 @@ const styles = StyleSheet.create({
 })
 
 const SettingsTemplate: FC = () => {
-  const { id, first_name, last_name } = useUserProfile()
-  const source = require("@/assets/images/provided_avatar.png")
+  const { id, first_name, last_name, user_photo } = useUserProfile()
 
   const [firstNameInput, setFirstNameInput] = useState(first_name)
   const [lastNameInput, setLastNameInput] = useState(last_name)
@@ -55,7 +54,7 @@ const SettingsTemplate: FC = () => {
       <View style={styles.inlay}>
         <View style={styles.firstBlock}>
           <View style={styles.avatarSection}>
-            <Avatar source={source} size="md" />
+            <Avatar source={user_photo!} size="md" />
             <Container variant="form" style={styles.updatePhotoContainer}>
               <Typography>Update photo</Typography>
             </Container>

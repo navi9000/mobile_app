@@ -34,12 +34,11 @@ const styles = StyleSheet.create({
 })
 
 const ProfilePicture: FC<Resolve<Props>> = ({ style }) => {
-  const { first_name, last_name } = useUserProfile()
-  const avatar = require("@/assets/images/provided_avatar.png")
+  const { first_name, last_name, user_photo } = useUserProfile()
 
   return (
     <View style={[styles.container, style]}>
-      <Avatar size="full" source={avatar} />
+      <Avatar size="full" source={user_photo ?? ""} />
       <LinearGradient
         style={styles.gradient}
         colors={["#000", "rgba(0,0,0,0)"]}

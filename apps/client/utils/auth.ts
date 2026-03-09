@@ -37,7 +37,7 @@ export class Auth {
       last_name: data[2][1]!,
       location: data[3][1] ?? null,
       occupation: data[4][1] ?? null,
-      user_photo: data[5][1] ?? null,
+      user_photo: data[5][1]?.replace(".png", ".avif") ?? null,
     }
   }
 }

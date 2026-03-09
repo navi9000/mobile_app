@@ -11,7 +11,7 @@ import {
 } from "react-native"
 
 type Props = {
-  source: ImageProps["source"]
+  source: string
   name: string
   onPress?: (event: GestureResponderEvent) => void
 }

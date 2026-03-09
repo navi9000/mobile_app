@@ -6,13 +6,15 @@ const Home: FC = () => {
   const messageList: Omit<Message, "text">[] = [
     {
       author: "John Doe",
-      authorImage: require("@/assets/images/provided_avatar.png"),
+      authorImage:
+        "https://res.cloudinary.com/da6rqo2u6/image/upload/v1773066497/users/shoes_v2.avif",
       timePassed: "Just now",
     },
   ]
 
   const recentChats: Message[] = Array.from({ length: 10 }, () => ({
-    authorImage: require("@/assets/images/provided_avatar.png"),
+    authorImage:
+      "https://res.cloudinary.com/da6rqo2u6/image/upload/v1773066497/users/shoes_v2.avif",
     author: "Andrea Jameson",
     text: "I am on my way",
     timePassed: "Just now",

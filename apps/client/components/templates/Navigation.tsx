@@ -1,10 +1,5 @@
 import { FC } from "react"
-import {
-  GestureResponderEvent,
-  ImageSourcePropType,
-  StyleSheet,
-  View,
-} from "react-native"
+import { GestureResponderEvent, StyleSheet, View } from "react-native"
 import NavItem from "../molecules/NavItem/NavItem"
 import LogoutButton from "../molecules/LogoutButton/LogoutButton"
 import { NavigationItem, Resolve } from "@/utils/types"
@@ -13,7 +8,7 @@ type Props = {
   navigationItems: NavigationItem[]
   user: {
     fullName: string
-    avatar: ImageSourcePropType
+    avatar: string
   }
   logout: (event: GestureResponderEvent) => void
 }

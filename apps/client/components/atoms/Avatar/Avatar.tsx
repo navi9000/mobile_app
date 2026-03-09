@@ -1,6 +1,12 @@
 import { Resolve } from "@/utils/types"
 import { FC } from "react"
-import { Image, ImageProps, StyleSheet, View } from "react-native"
+import {
+  Image,
+  ImageProps,
+  ImageSourcePropType,
+  StyleSheet,
+  View,
+} from "react-native"
 
 const styles = StyleSheet.create({
   image: {
@@ -31,7 +37,7 @@ const styles = StyleSheet.create({
 type AvatarSize = "full" | "lg" | "md" | "sm" | "xs"
 
 type Props = {
-  source: ImageProps["source"]
+  source: string
   size: AvatarSize
   style?: ImageProps["style"]
   shadow?: boolean
@@ -52,7 +58,10 @@ const Avatar: FC<Resolve<Props>> = ({
         style,
       ]}
     >
-      <Image source={source} style={{ height: "100%", width: "100%" }} />
+      <Image
+        source={{ uri: source }}
+        style={{ height: "100%", width: "100%" }}
+      />
     </View>
   )
 }
