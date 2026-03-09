@@ -1,6 +1,4 @@
 import { Model, DataTypes, Sequelize } from "sequelize"
-import { sequelize } from "../config/db.config"
-import UserAccount from "./UserAccount"
 
 export default (sequelize: Sequelize, { UserAccount }: any) => {
   class UserProfile extends Model {}
@@ -10,10 +8,10 @@ export default (sequelize: Sequelize, { UserAccount }: any) => {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        references: {
-          model: UserAccount,
-          key: "id",
-        },
+        // references: {
+        //   model: UserAccount,
+        //   key: "id",
+        // },
       },
       first_name: {
         type: DataTypes.STRING,

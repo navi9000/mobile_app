@@ -20,6 +20,9 @@ const Chat = loadChat(sequelize)
 const ChatParticipant = loadChatParticipant(sequelize, { Chat, UserAccount })
 const ChatMessage = loadChatMessage(sequelize, { Chat, UserAccount })
 
+UserAccount.hasOne(UserProfile, { foreignKey: "id" })
+UserProfile.belongsTo(UserAccount, { foreignKey: "id" })
+
 const models = { UserAccount, UserProfile, Chat, ChatParticipant, ChatMessage }
 
 export { sequelize, models }

@@ -83,6 +83,7 @@ router.post("/sign-in", async (req, res) => {
     where: {
       email,
     },
+    include: UserProfile,
   })
 
   if (!userAcc) {
@@ -102,33 +103,26 @@ router.post("/sign-in", async (req, res) => {
     return
   }
 
-  const userProfile = await UserProfile.findOne({
-    where: {
-      id: userAcc.dataValues.id,
-    },
-  })
-
-  if (!userProfile) {
-    res.status(404).json({
-      is_success: false,
-      message: "Unable to find user profile",
-    })
-    return
-  }
-
   res.json({
     is_success: true,
     body: {
-      profile: userProfile.dataValues,
+      profile: userAcc.dataValues.user_profile,
     },
   })
 })
 
 router.get("/list", async (req, res) => {
-  const accounts = await UserAccount.findAll()
-  res.json({
-    accounts: accounts,
-  })
+  try {
+    const accounts = await UserAccount.findAll({ include: UserProfile })
+    res.json({
+      accounts: accounts,
+    })
+  } catch (err) {
+    console.log({ err })
+    res.status(500).json({
+      is_success: false,
+    })
+  }
 })
 
 export default router
